@@ -1,5 +1,5 @@
 /* =========================================
-   NEXUS STORE — Shared JS (main.js)
+   RAJNISH STORE — Shared JS (main.js)
    ========================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- Cart count badge (persisted in localStorage) --- */
   function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem('nexus_cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem('rajnish_cart') || '[]');
     const total = cart.reduce((s, i) => s + i.qty, 0);
     document.querySelectorAll('.cart-count').forEach(b => {
       b.textContent = total;
@@ -91,11 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   window.addToCart = function(name, price) {
-    const cart = JSON.parse(localStorage.getItem('nexus_cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem('rajnish_cart') || '[]');
     const idx  = cart.findIndex(i => i.name === name);
     if (idx > -1) cart[idx].qty++;
     else cart.push({ name, price, qty: 1 });
-    localStorage.setItem('nexus_cart', JSON.stringify(cart));
+    localStorage.setItem('rajnish_cart', JSON.stringify(cart));
     updateCartBadge();
     showToast(`"${name}" added to cart! 🛒`);
   };

@@ -4,13 +4,13 @@
 
 const FEATURED_PRODUCTS = [
   { id: 1, name: 'ProAir X Wireless Earbuds', price: 89, oldPrice: 129, rating: 4.8, reviews: 1240, emoji: '🎧', badge: 'badge-violet', badgeText: 'Best Seller', cat: 'audio', desc: 'Active noise-cancellation, 36h battery, IPX5 waterproof.' },
-  { id: 2, name: 'NexWatch Ultra Smartwatch', price: 199, oldPrice: 279, rating: 4.9, reviews: 890, emoji: '⌚', badge: 'badge-cyan', badgeText: 'New Arrival', cat: 'wearables', desc: 'Health tracking, GPS, always-on AMOLED display.' },
+  { id: 2, name: 'RajnishWatch Ultra Smartwatch', price: 199, oldPrice: 279, rating: 4.9, reviews: 890, emoji: '⌚', badge: 'badge-cyan', badgeText: 'New Arrival', cat: 'wearables', desc: 'Health tracking, GPS, always-on AMOLED display.' },
   { id: 3, name: 'MechaKey RGB Keyboard', price: 119, oldPrice: 159, rating: 4.7, reviews: 632, emoji: '⌨️', badge: 'badge-amber', badgeText: 'Hot Deal', cat: 'gaming', desc: 'Tactile switches, per-key RGB, aluminum frame.' },
   { id: 4, name: 'LumaCam 4K Action Cam', price: 249, oldPrice: 349, rating: 4.8, reviews: 415, emoji: '📷', badge: 'badge-green', badgeText: 'Sale', cat: 'camera', desc: '4K60fps, 30m waterproof, image stabilization.' },
 ];
 
 const TESTIMONIALS = [
-  { name: 'Sarah K.', tag: 'Tech Enthusiast', text: '"Nexus is my go-to shop. The earbuds I ordered arrived in 2 days and the sound quality blew me away. Customer service is top tier!"', stars: 5, initial: 'S' },
+  { name: 'Sarah K.', tag: 'Tech Enthusiast', text: '"Rajnish is my go-to shop. The earbuds I ordered arrived in 2 days and the sound quality blew me away. Customer service is top tier!"', stars: 5, initial: 'S' },
   { name: 'Marcus T.', tag: 'Verified Buyer', text: '"Ordered a smartwatch as a gift. Packaging was gorgeous and it arrived early. The 30-day return policy gave me total peace of mind."', stars: 5, initial: 'M' },
   { name: 'Priya R.', tag: 'Gaming Pro', text: '"MechaKey keyboard is an absolute beast. Every keystroke is satisfying. Fast shipping and well-packaged. 10/10 would recommend."', stars: 5, initial: 'P' },
 ];
@@ -64,7 +64,7 @@ function buildTestimonials() {
 function handleNewsletter(e) {
   e.preventDefault();
   const email = document.getElementById('nl-email').value;
-  showToast(`🎉 ${email} subscribed! Welcome to Nexus.`);
+  showToast(`🎉 ${email} subscribed! Welcome to Rajnish.`);
   document.getElementById('nl-form').reset();
 }
 
