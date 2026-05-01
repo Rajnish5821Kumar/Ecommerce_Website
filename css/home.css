@@ -389,3 +389,28 @@
   .hero-stats { flex-wrap: wrap; gap: 20px; }
   .stat-divider { display: none; }
 }
+
+/* Category card images */
+.cat-card .cat-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124,58,237,0.1);
+  border: 2px solid rgba(124,58,237,0.2);
+  transition: var(--transition);
+}
+.cat-card .cat-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.cat-card:hover .cat-icon {
+  border-color: rgba(124,58,237,0.5);
+  box-shadow: 0 0 20px rgba(124,58,237,0.3);
+  transform: scale(1.1);
+}
