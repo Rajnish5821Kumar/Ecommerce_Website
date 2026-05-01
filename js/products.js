@@ -1,45 +1,52 @@
-const WOMENS_LINK = 'https://amzn.to/49b5Rfh';
-const MENS_LINK   = 'https://amzn.to/3QIJmYN';
-const KIDS_LINK   = 'https://amzn.to/4enH8Ig';
+/* === AMAZON AFFILIATE LINKS === */
+const TECH_LINK      = 'https://amzn.to/4tGOvPH';
+const AUDIO_LINK     = 'https://amzn.to/4tKVas5';
+const WEARABLE_LINK  = 'https://amzn.to/4eFXMD9';
+const GAMING_LINK    = 'https://amzn.to/4tX9GNm';
+const LIFESTYLE_LINK = 'https://amzn.to/4nnBCb7';
+const CAMERA_LINK    = 'https://amzn.to/4unI6Jg';
+const WOMENS_LINK    = 'https://amzn.to/49b5Rfh';
+const MENS_LINK      = 'https://amzn.to/3QIJmYN';
+const KIDS_LINK      = 'https://amzn.to/4enH8Ig';
 
 const ALL_PRODUCTS = [
   // Tech
-  { id:1,  name:'UltraBook Pro 15',         price:1299, oldPrice:1599, rating:4.9, reviews:880,  emoji:'💻', cat:'tech',      badge:'badge-violet', badgeText:'Best Seller', desc:'Intel i9, 32GB RAM, 4K OLED display.' },
-  { id:2,  name:'NexPad Wireless Charger',  price:49,  oldPrice:79,   rating:4.7, reviews:2100, emoji:'🔋', cat:'tech',      badge:'badge-green',  badgeText:'Sale',        desc:'15W fast charge, Qi compatible, sleek design.' },
-  { id:3,  name:'PixelMouse Pro',           price:79,  oldPrice:109,  rating:4.8, reviews:640,  emoji:'🖱️', cat:'tech',      badge:'badge-cyan',   badgeText:'New',         desc:'8000 DPI, silent clicks, ergonomic shape.' },
-  { id:4,  name:'SmartHub 7-in-1 USB-C',   price:59,  oldPrice:89,   rating:4.6, reviews:1350, emoji:'🔌', cat:'tech',      badge:'badge-amber',  badgeText:'Hot',         desc:'HDMI 4K, 3x USB-A, SD card reader.' },
+  { id:1,  name:'UltraBook Pro 15',         price:1299, oldPrice:1599, rating:4.9, reviews:880,  emoji:'💻', cat:'tech',      badge:'badge-violet', badgeText:'Best Seller', desc:'Intel i9, 32GB RAM, 4K OLED display.',                        affiliateUrl:TECH_LINK,      ctaText:'Buy on Amazon →' },
+  { id:2,  name:'NexPad Wireless Charger',  price:49,  oldPrice:79,   rating:4.7, reviews:2100, emoji:'🔋', cat:'tech',      badge:'badge-green',  badgeText:'Sale',        desc:'15W fast charge, Qi compatible, sleek design.',               affiliateUrl:TECH_LINK,      ctaText:'Buy on Amazon →' },
+  { id:3,  name:'PixelMouse Pro',           price:79,  oldPrice:109,  rating:4.8, reviews:640,  emoji:'🖱️', cat:'tech',      badge:'badge-cyan',   badgeText:'New',         desc:'8000 DPI, silent clicks, ergonomic shape.',                   affiliateUrl:TECH_LINK,      ctaText:'Buy on Amazon →' },
+  { id:4,  name:'SmartHub 7-in-1 USB-C',   price:59,  oldPrice:89,   rating:4.6, reviews:1350, emoji:'🔌', cat:'tech',      badge:'badge-amber',  badgeText:'Hot',         desc:'HDMI 4K, 3x USB-A, SD card reader.',                         affiliateUrl:TECH_LINK,      ctaText:'Buy on Amazon →' },
   // Audio
-  { id:5,  name:'ProAir X Earbuds',         price:89,  oldPrice:129,  rating:4.8, reviews:1240, emoji:'🎧', cat:'audio',     badge:'badge-violet', badgeText:'Best Seller', desc:'ANC, 36h battery, IPX5 waterproof.' },
-  { id:6,  name:'BassBlast Speaker',        price:149, oldPrice:199,  rating:4.7, reviews:530,  emoji:'🔊', cat:'audio',     badge:'badge-amber',  badgeText:'Hot Deal',    desc:'360° sound, 24h playtime, waterproof.' },
-  { id:7,  name:'StudioMic USB',            price:109, oldPrice:149,  rating:4.9, reviews:760,  emoji:'🎙️', cat:'audio',     badge:'badge-green',  badgeText:'Top Rated',   desc:'Cardioid condenser, 192kHz, plug & play.' },
-  { id:8,  name:'SonicWrap Headphones',     price:199, oldPrice:279,  rating:4.8, reviews:420,  emoji:'🎵', cat:'audio',     badge:'badge-cyan',   badgeText:'New',         desc:'Planar magnetic drivers, 50mm, foldable.' },
+  { id:5,  name:'ProAir X Earbuds',         price:89,  oldPrice:129,  rating:4.8, reviews:1240, emoji:'🎧', cat:'audio',     badge:'badge-violet', badgeText:'Best Seller', desc:'ANC, 36h battery, IPX5 waterproof.',                          affiliateUrl:AUDIO_LINK,     ctaText:'Buy on Amazon →' },
+  { id:6,  name:'BassBlast Speaker',        price:149, oldPrice:199,  rating:4.7, reviews:530,  emoji:'🔊', cat:'audio',     badge:'badge-amber',  badgeText:'Hot Deal',    desc:'360° sound, 24h playtime, waterproof.',                       affiliateUrl:AUDIO_LINK,     ctaText:'Buy on Amazon →' },
+  { id:7,  name:'StudioMic USB',            price:109, oldPrice:149,  rating:4.9, reviews:760,  emoji:'🎙️', cat:'audio',     badge:'badge-green',  badgeText:'Top Rated',   desc:'Cardioid condenser, 192kHz, plug & play.',                    affiliateUrl:AUDIO_LINK,     ctaText:'Buy on Amazon →' },
+  { id:8,  name:'SonicWrap Headphones',     price:199, oldPrice:279,  rating:4.8, reviews:420,  emoji:'🎵', cat:'audio',     badge:'badge-cyan',   badgeText:'New',         desc:'Planar magnetic drivers, 50mm, foldable.',                    affiliateUrl:AUDIO_LINK,     ctaText:'Buy on Amazon →' },
   // Wearables
-  { id:9,  name:'NexWatch Ultra',           price:199, oldPrice:279,  rating:4.9, reviews:890,  emoji:'⌚', cat:'wearables', badge:'badge-cyan',   badgeText:'New Arrival', desc:'Health tracking, GPS, AMOLED.' },
-  { id:10, name:'FitBand Pro X',            price:69,  oldPrice:99,   rating:4.6, reviews:1820, emoji:'📿', cat:'wearables', badge:'badge-green',  badgeText:'Sale',        desc:'Heart rate, SpO2, 14-day battery.' },
-  { id:11, name:'SmartRing Health',         price:299, oldPrice:399,  rating:4.8, reviews:310,  emoji:'💍', cat:'wearables', badge:'badge-violet', badgeText:'Premium',     desc:'Continuous health monitoring, titanium.' },
-  { id:12, name:'AR Glasses Lite',          price:449, oldPrice:599,  rating:4.5, reviews:180,  emoji:'🥽', cat:'wearables', badge:'badge-amber',  badgeText:'Featured',    desc:'25° FoV, 3h battery, lightweight 35g.' },
+  { id:9,  name:'NexWatch Ultra',           price:199, oldPrice:279,  rating:4.9, reviews:890,  emoji:'⌚', cat:'wearables', badge:'badge-cyan',   badgeText:'New Arrival', desc:'Health tracking, GPS, AMOLED.',                              affiliateUrl:WEARABLE_LINK,  ctaText:'Buy on Amazon →' },
+  { id:10, name:'FitBand Pro X',            price:69,  oldPrice:99,   rating:4.6, reviews:1820, emoji:'📿', cat:'wearables', badge:'badge-green',  badgeText:'Sale',        desc:'Heart rate, SpO2, 14-day battery.',                          affiliateUrl:WEARABLE_LINK,  ctaText:'Buy on Amazon →' },
+  { id:11, name:'SmartRing Health',         price:299, oldPrice:399,  rating:4.8, reviews:310,  emoji:'💍', cat:'wearables', badge:'badge-violet', badgeText:'Premium',     desc:'Continuous health monitoring, titanium.',                    affiliateUrl:WEARABLE_LINK,  ctaText:'Buy on Amazon →' },
+  { id:12, name:'AR Glasses Lite',          price:449, oldPrice:599,  rating:4.5, reviews:180,  emoji:'🥽', cat:'wearables', badge:'badge-amber',  badgeText:'Featured',    desc:'25° FoV, 3h battery, lightweight 35g.',                      affiliateUrl:WEARABLE_LINK,  ctaText:'Buy on Amazon →' },
   // Gaming
-  { id:13, name:'MechaKey RGB Keyboard',   price:119, oldPrice:159,  rating:4.7, reviews:632,  emoji:'⌨️', cat:'gaming',    badge:'badge-amber',  badgeText:'Hot Deal',    desc:'Tactile switches, per-key RGB, aluminum.' },
-  { id:14, name:'ProPad Elite Controller', price:89,  oldPrice:119,  rating:4.8, reviews:940,  emoji:'🎮', cat:'gaming',    badge:'badge-violet', badgeText:'Best Seller', desc:'Hall-effect sticks, 40h battery, PC+Console.' },
-  { id:15, name:'TrackX Gaming Mouse',     price:69,  oldPrice:99,   rating:4.9, reviews:1500, emoji:'🖲️', cat:'gaming',    badge:'badge-green',  badgeText:'Top Rated',   desc:'16000 DPI, 7 buttons, ultralight 58g.' },
-  { id:16, name:'SuroundX Gaming Headset', price:99,  oldPrice:139,  rating:4.7, reviews:720,  emoji:'🎯', cat:'gaming',    badge:'badge-cyan',   badgeText:'New',         desc:'7.1 surround, memory foam, retractable mic.' },
+  { id:13, name:'MechaKey RGB Keyboard',   price:119, oldPrice:159,  rating:4.7, reviews:632,  emoji:'⌨️', cat:'gaming',    badge:'badge-amber',  badgeText:'Hot Deal',    desc:'Tactile switches, per-key RGB, aluminum.',                   affiliateUrl:GAMING_LINK,    ctaText:'Buy on Amazon →' },
+  { id:14, name:'ProPad Elite Controller', price:89,  oldPrice:119,  rating:4.8, reviews:940,  emoji:'🎮', cat:'gaming',    badge:'badge-violet', badgeText:'Best Seller', desc:'Hall-effect sticks, 40h battery, PC+Console.',               affiliateUrl:GAMING_LINK,    ctaText:'Buy on Amazon →' },
+  { id:15, name:'TrackX Gaming Mouse',     price:69,  oldPrice:99,   rating:4.9, reviews:1500, emoji:'🖲️', cat:'gaming',    badge:'badge-green',  badgeText:'Top Rated',   desc:'16000 DPI, 7 buttons, ultralight 58g.',                      affiliateUrl:GAMING_LINK,    ctaText:'Buy on Amazon →' },
+  { id:16, name:'SuroundX Gaming Headset', price:99,  oldPrice:139,  rating:4.7, reviews:720,  emoji:'🎯', cat:'gaming',    badge:'badge-cyan',   badgeText:'New',         desc:'7.1 surround, memory foam, retractable mic.',                affiliateUrl:GAMING_LINK,    ctaText:'Buy on Amazon →' },
   // Lifestyle
-  { id:17, name:'AirPurify Pro',           price:179, oldPrice:249,  rating:4.8, reviews:540,  emoji:'🌿', cat:'lifestyle', badge:'badge-green',  badgeText:'Eco Pick',    desc:'HEPA H13, 600sqft coverage, app-controlled.' },
-  { id:18, name:'DeskOrganizer Bamboo',    price:39,  oldPrice:59,   rating:4.6, reviews:1200, emoji:'🪴', cat:'lifestyle', badge:'badge-amber',  badgeText:'Sale',        desc:'Sustainable bamboo, 6 compartments.' },
-  { id:19, name:'LightBar Sunrise Alarm',  price:89,  oldPrice:119,  rating:4.7, reviews:870,  emoji:'☀️', cat:'lifestyle', badge:'badge-violet', badgeText:'Featured',    desc:'Gradual sunrise, Spotify, 20 sound modes.' },
-  { id:20, name:'HydroTrack Smart Bottle', price:49,  oldPrice:69,   rating:4.5, reviews:2300, emoji:'💧', cat:'lifestyle', badge:'badge-cyan',   badgeText:'Popular',     desc:'LED hydration reminder, 600ml, BPA-free.' },
+  { id:17, name:'AirPurify Pro',           price:179, oldPrice:249,  rating:4.8, reviews:540,  emoji:'🌿', cat:'lifestyle', badge:'badge-green',  badgeText:'Eco Pick',    desc:'HEPA H13, 600sqft coverage, app-controlled.',                affiliateUrl:LIFESTYLE_LINK, ctaText:'Buy on Amazon →' },
+  { id:18, name:'DeskOrganizer Bamboo',    price:39,  oldPrice:59,   rating:4.6, reviews:1200, emoji:'🪴', cat:'lifestyle', badge:'badge-amber',  badgeText:'Sale',        desc:'Sustainable bamboo, 6 compartments.',                        affiliateUrl:LIFESTYLE_LINK, ctaText:'Buy on Amazon →' },
+  { id:19, name:'LightBar Sunrise Alarm',  price:89,  oldPrice:119,  rating:4.7, reviews:870,  emoji:'☀️', cat:'lifestyle', badge:'badge-violet', badgeText:'Featured',    desc:'Gradual sunrise, Spotify, 20 sound modes.',                  affiliateUrl:LIFESTYLE_LINK, ctaText:'Buy on Amazon →' },
+  { id:20, name:'HydroTrack Smart Bottle', price:49,  oldPrice:69,   rating:4.5, reviews:2300, emoji:'💧', cat:'lifestyle', badge:'badge-cyan',   badgeText:'Popular',     desc:'LED hydration reminder, 600ml, BPA-free.',                   affiliateUrl:LIFESTYLE_LINK, ctaText:'Buy on Amazon →' },
   // Camera
-  { id:21, name:'LumaCam 4K Action',       price:249, oldPrice:349,  rating:4.8, reviews:415,  emoji:'📷', cat:'camera',    badge:'badge-green',  badgeText:'Sale',        desc:'4K60fps, 30m waterproof, stabilization.' },
-  { id:22, name:'SnapDrone Mini 4K',       price:399, oldPrice:549,  rating:4.7, reviews:260,  emoji:'🚁', cat:'camera',    badge:'badge-violet', badgeText:'Premium',     desc:'4K HDR, 30min flight, obstacle avoidance.' },
-  { id:23, name:'VlogKit Wide-Angle Lens', price:79,  oldPrice:109,  rating:4.6, reviews:680,  emoji:'🔭', cat:'camera',    badge:'badge-amber',  badgeText:'Hot',         desc:'17mm equivalent, 4K compatible, clip-on.' },
-  { id:24, name:'TripodFlex Carbon',       price:119, oldPrice:159,  rating:4.8, reviews:490,  emoji:'📸', cat:'camera',    badge:'badge-cyan',   badgeText:'New',         desc:'Carbon fibre, 2kg load, 180° ball head.' },
+  { id:21, name:'LumaCam 4K Action',       price:249, oldPrice:349,  rating:4.8, reviews:415,  emoji:'📷', cat:'camera',    badge:'badge-green',  badgeText:'Sale',        desc:'4K60fps, 30m waterproof, stabilization.',                    affiliateUrl:CAMERA_LINK,    ctaText:'Buy on Amazon →' },
+  { id:22, name:'SnapDrone Mini 4K',       price:399, oldPrice:549,  rating:4.7, reviews:260,  emoji:'🚁', cat:'camera',    badge:'badge-violet', badgeText:'Premium',     desc:'4K HDR, 30min flight, obstacle avoidance.',                  affiliateUrl:CAMERA_LINK,    ctaText:'Buy on Amazon →' },
+  { id:23, name:'VlogKit Wide-Angle Lens', price:79,  oldPrice:109,  rating:4.6, reviews:680,  emoji:'🔭', cat:'camera',    badge:'badge-amber',  badgeText:'Hot',         desc:'17mm equivalent, 4K compatible, clip-on.',                   affiliateUrl:CAMERA_LINK,    ctaText:'Buy on Amazon →' },
+  { id:24, name:'TripodFlex Carbon',       price:119, oldPrice:159,  rating:4.8, reviews:490,  emoji:'📸', cat:'camera',    badge:'badge-cyan',   badgeText:'New',         desc:'Carbon fibre, 2kg load, 180° ball head.',                    affiliateUrl:CAMERA_LINK,    ctaText:'Buy on Amazon →' },
   // Women's Fashion
   { id:25, name:"Women's Dresses",          price:null, oldPrice:null, rating:4.8, reviews:1240, emoji:'👗', cat:'women-fashion', badge:'badge-pink',   badgeText:"Women's Pick",  desc:'Sarees, kurtis, dresses & tops — everyday wear to party outfits.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
-  { id:26, name:"Women's Ethnic Wear",      price:null, oldPrice:null, rating:4.7, reviews:980,  emoji:'🤱‍♀️', cat:'women-fashion', badge:'badge-pink',   badgeText:'Trending',       desc:'Lehengas, anarkalis & salwar suits curated for every occasion.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:26, name:"Women's Ethnic Wear",      price:null, oldPrice:null, rating:4.7, reviews:980,  emoji:'🤱', cat:'women-fashion', badge:'badge-pink',   badgeText:'Trending',       desc:'Lehengas, anarkalis & salwar suits curated for every occasion.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
   { id:27, name:"Women's Western Tops",     price:null, oldPrice:null, rating:4.6, reviews:760,  emoji:'💜', cat:'women-fashion', badge:'badge-cyan',   badgeText:'New Arrivals',   desc:'Casual and formal tops, blouses & shirts in premium fabrics.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
   // Men's Fashion
   { id:28, name:"Men's Formal Shirts",      price:null, oldPrice:null, rating:4.8, reviews:1450, emoji:'👔', cat:'men-fashion', badge:'badge-blue',   badgeText:"Men's Pick",    desc:'Crisp formal & semi-formal shirts for office and events.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
-  { id:29, name:"Men's Ethnic Wear",        price:null, oldPrice:null, rating:4.7, reviews:830,  emoji:'👺', cat:'men-fashion', badge:'badge-violet', badgeText:'Trending',       desc:'Kurtas, sherwanis & dhoti sets for festive and wedding looks.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:29, name:"Men's Ethnic Wear",        price:null, oldPrice:null, rating:4.7, reviews:830,  emoji:'🧔', cat:'men-fashion', badge:'badge-violet', badgeText:'Trending',       desc:'Kurtas, sherwanis & dhoti sets for festive and wedding looks.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
   { id:30, name:"Men's Casual & Sports",    price:null, oldPrice:null, rating:4.6, reviews:1100, emoji:'🏃', cat:'men-fashion', badge:'badge-green',  badgeText:'Active Wear',    desc:'T-shirts, joggers, track pants & hoodies for everyday comfort.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
   // Kids' Fashion
   { id:31, name:"Kids' Clothing Set",       price:null, oldPrice:null, rating:4.9, reviews:2100, emoji:'🧒', cat:'kids-fashion', badge:'badge-amber', badgeText:"Kids' Pick",    desc:'Fun & colourful clothing sets for boys and girls (2–12 yrs).', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
