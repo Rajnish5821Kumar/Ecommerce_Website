@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products — Nexus Store | Shop Premium Tech & Lifestyle</title>
-  <meta name="description" content="Browse 850+ premium products. Filter by category, sort by price, and find the best deals at Nexus Store." />
+  <title>Products — Nexus Store | Shop Premium Tech, Lifestyle & Fashion</title>
+  <meta name="description" content="Browse 850+ premium products, including tech, lifestyle, fashion and women's dresses. Filter by category, sort by price, and find the best deals at Nexus Store." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/products.css" />
 </head>
@@ -32,10 +32,25 @@
     <span class="section-tag">🛍️ All Products</span>
     <h1>Our <span class="gradient-text">Collection</span></h1>
     <p style="color:var(--text-secondary);max-width:500px;margin:.8rem auto 0;">
-      850+ curated products across tech, audio, gaming, lifestyle and more.
+      850+ curated products across tech, audio, gaming, lifestyle, fashion and more.
     </p>
   </div>
 </div>
+
+<!-- WOMEN'S DRESSES FEATURE -->
+<section class="dress-feature" id="womens-dresses">
+  <div class="container dress-feature-inner">
+    <div class="dress-feature-copy">
+      <span class="badge badge-cyan">New Section</span>
+      <h2>Women's Dress Collection</h2>
+      <p>Explore handpicked dress styles for everyday wear, parties and special occasions.</p>
+    </div>
+    <div class="dress-feature-action">
+      <span class="dress-feature-icon" aria-hidden="true">👗</span>
+      <a href="https://amzn.to/49b5Rfh" class="btn btn-primary" target="_blank" rel="sponsored noopener noreferrer">Shop Dresses</a>
+    </div>
+  </div>
+</section>
 
 <!-- PRODUCTS MAIN -->
 <section class="products-section" id="products-main">
@@ -54,6 +69,7 @@
         <button class="pill" data-cat="gaming"    id="filter-gaming">🎮 Gaming</button>
         <button class="pill" data-cat="lifestyle" id="filter-lifestyle">🌿 Lifestyle</button>
         <button class="pill" data-cat="camera"    id="filter-camera">📷 Camera</button>
+        <button class="pill" data-cat="women-dresses" id="filter-women-dresses">👗 Dresses</button>
       </div>
       <div class="sort-wrap">
         <select id="sort-select" aria-label="Sort products">
@@ -67,7 +83,7 @@
     </div>
 
     <!-- Results count -->
-    <div class="results-meta" id="results-meta">Showing <strong id="count-label">24</strong> products</div>
+    <div class="results-meta" id="results-meta">Showing <strong id="count-label">25</strong> products</div>
 
     <!-- Grid -->
     <div class="products-grid" id="products-grid"></div>
@@ -101,6 +117,7 @@
         <li><a href="products.html?cat=tech">Tech</a></li>
         <li><a href="products.html?cat=audio">Audio</a></li>
         <li><a href="products.html?cat=gaming">Gaming</a></li>
+        <li><a href="products.html?cat=women-dresses">Women's Dresses</a></li>
       </ul></div>
       <div class="footer-col"><h4>Company</h4><ul>
         <li><a href="about.html">About</a></li>

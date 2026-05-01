@@ -1,4 +1,38 @@
 /* === PRODUCTS PAGE === */
+.dress-feature {
+  padding: 40px 0;
+  background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(6,182,212,0.07));
+  border-top: 1px solid rgba(236,72,153,0.18);
+  border-bottom: 1px solid rgba(6,182,212,0.14);
+}
+.dress-feature-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+.dress-feature-copy { max-width: 680px; }
+.dress-feature h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); margin: 12px 0 10px; }
+.dress-feature p { max-width: 560px; }
+.dress-feature-action {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+.dress-feature-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-glass);
+  font-size: 2.6rem;
+  box-shadow: var(--shadow-card);
+}
+
 .products-section { padding: 40px 0 80px; }
 
 /* Toolbar */
@@ -135,6 +169,10 @@
   font-size: 0.82rem;
   cursor: pointer;
   transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .p-add-btn:hover { opacity: 0.88; transform: scale(0.98); }
 
@@ -149,5 +187,14 @@
 .empty-state p { margin-bottom: 24px; }
 
 @media (max-width: 1100px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 768px)  { .products-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px)  { .products-grid { grid-template-columns: 1fr; } .products-toolbar { flex-direction: column; } }
+@media (max-width: 768px)  {
+  .dress-feature-inner { flex-direction: column; align-items: flex-start; }
+  .dress-feature-action { width: 100%; justify-content: space-between; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px)  {
+  .dress-feature-action { flex-direction: column; align-items: stretch; }
+  .dress-feature-icon { width: 100%; }
+  .products-grid { grid-template-columns: 1fr; }
+  .products-toolbar { flex-direction: column; }
+}

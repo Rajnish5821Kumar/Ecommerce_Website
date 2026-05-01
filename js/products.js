@@ -1,5 +1,7 @@
 /* === PRODUCTS PAGE JS === */
 
+const WOMENS_DRESS_LINK = 'https://amzn.to/49b5Rfh';
+
 const ALL_PRODUCTS = [
   // Tech
   { id:1,  name:'UltraBook Pro 15',         price:1299, oldPrice:1599, rating:4.9, reviews:880,  emoji:'💻', cat:'tech',      badge:'badge-violet', badgeText:'Best Seller', desc:'Intel i9, 32GB RAM, 4K OLED display.' },
@@ -31,6 +33,8 @@ const ALL_PRODUCTS = [
   { id:22, name:'SnapDrone Mini 4K',       price:399, oldPrice:549,  rating:4.7, reviews:260,  emoji:'🚁', cat:'camera',    badge:'badge-violet', badgeText:'Premium',     desc:'4K HDR, 30min flight, obstacle avoidance.' },
   { id:23, name:'VlogKit Wide-Angle Lens', price:79,  oldPrice:109,  rating:4.6, reviews:680,  emoji:'🔭', cat:'camera',    badge:'badge-amber',  badgeText:'Hot',         desc:'17mm equivalent, 4K compatible, clip-on.' },
   { id:24, name:'TripodFlex Carbon',       price:119, oldPrice:159,  rating:4.8, reviews:490,  emoji:'📸', cat:'camera',    badge:'badge-cyan',   badgeText:'New',         desc:'Carbon fibre, 2kg load, 180° ball head.' },
+  // Women's Dresses
+  { id:25, name:"Women's Dress Collection", price:null, oldPrice:null, rating:4.7, reviews:520, emoji:'👗', cat:'women-dresses', badge:'badge-cyan', badgeText:'New Section', desc:'Curated dress styles for everyday wear, parties and special occasions.', affiliateUrl:WOMENS_DRESS_LINK, ctaText:'Shop on Amazon', priceLabel:'View offer' },
 ];
 
 let filtered = [...ALL_PRODUCTS];
@@ -45,8 +49,8 @@ function renderProducts() {
     return matchCat && matchSearch;
   });
 
-  if (sortBy === 'price-asc')  list.sort((a,b) => a.price - b.price);
-  if (sortBy === 'price-desc') list.sort((a,b) => b.price - a.price);
+  if (sortBy === 'price-asc')  list.sort((a,b) => comparePrices(a, b, 'asc'));
+  if (sortBy === 'price-desc') list.sort((a,b) => comparePrices(a, b, 'desc'));
   if (sortBy === 'rating')     list.sort((a,b) => b.rating - a.rating);
   if (sortBy === 'newest')     list.sort((a,b) => b.id - a.id);
 
@@ -64,7 +68,19 @@ function renderProducts() {
   empty.style.display = 'none';
 
   grid.innerHTML = list.map((p, i) => {
-    const save = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
+    const hasPrice = Number.isFinite(p.price);
+    const hasOldPrice = Number.isFinite(p.oldPrice);
+    const save = hasPrice && hasOldPrice ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : null;
+    const priceHtml = hasPrice
+      ? `<span class="p-price-now">$${p.price}</span>
+            ${hasOldPrice ? `<span class="p-price-old">$${p.oldPrice}</span>` : ''}
+            ${save ? `<span class="p-save">-${save}%</span>` : ''}`
+      : `<span class="p-price-now">${p.priceLabel || 'View offer'}</span>`;
+    const actionHtml = p.affiliateUrl
+      ? `<a class="p-add-btn p-link-btn" href="${p.affiliateUrl}" target="_blank" rel="sponsored noopener noreferrer" id="add-${p.id}">${p.ctaText || 'Shop Now'}</a>`
+      : `<button class="p-add-btn" onclick="addToCart('${p.name.replace(/'/g,"\\'")}', ${p.price})" id="add-${p.id}">
+            🛒 Add to Cart
+          </button>`;
     return `
       <div class="p-card" id="p-card-${p.id}" style="animation-delay:${i * 0.04}s">
         <div class="p-img">${p.emoji}</div>
@@ -76,18 +92,25 @@ function renderProducts() {
           <div class="p-name">${p.name}</div>
           <div class="p-desc">${p.desc}</div>
           <div class="p-price">
-            <span class="p-price-now">$${p.price}</span>
-            <span class="p-price-old">$${p.oldPrice}</span>
-            <span class="p-save">-${save}%</span>
+            ${priceHtml}
           </div>
         </div>
         <div class="p-actions">
-          <button class="p-add-btn" onclick="addToCart('${p.name.replace(/'/g,"\\'")}', ${p.price})" id="add-${p.id}">
-            🛒 Add to Cart
-          </button>
+          ${actionHtml}
         </div>
       </div>`;
   }).join('');
+}
+
+function comparePrices(a, b, direction) {
+  const aHasPrice = Number.isFinite(a.price);
+  const bHasPrice = Number.isFinite(b.price);
+
+  if (!aHasPrice && !bHasPrice) return 0;
+  if (!aHasPrice) return 1;
+  if (!bHasPrice) return -1;
+
+  return direction === 'asc' ? a.price - b.price : b.price - a.price;
 }
 
 function resetFilters() {
