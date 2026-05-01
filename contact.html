@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Nexus Store | Get in Touch</title>
+  <meta name="description" content="Contact Nexus Store — reach our support team via email, chat, or phone. We're here 24/7." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ Nexus</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="products.html" class="nav-cta">🛒 Shop Now <span class="cart-count" style="display:none;background:#f59e0b;color:#000;font-size:.65rem;font-weight:800;padding:1px 5px;border-radius:100px;margin-left:4px;">0</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+    <span class="section-tag">📩 Get in Touch</span>
+    <h1>We'd Love to <span class="gradient-text">Hear From You</span></h1>
+    <p style="color:var(--text-secondary);max-width:500px;margin:.8rem auto 0;">
+      Whether it's a question, feedback, or a partnership enquiry — we're all ears.
+    </p>
+  </div>
+</div>
+
+<!-- CONTACT INFO CARDS -->
+<section class="contact-info-section" id="contact-info">
+  <div class="container">
+    <div class="contact-info-grid">
+      <div class="info-card glass-card" data-reveal id="info-email">
+        <div class="info-icon">📧</div>
+        <h4>Email Support</h4>
+        <p>Average response in under 2 hours.</p>
+        <a href="mailto:rajoyadav1419@gmail.com" class="info-link">rajoyadav1419@gmail.com</a>
+      </div>
+      <div class="info-card glass-card" data-reveal id="info-chat">
+        <div class="info-icon">💬</div>
+        <h4>Live Chat</h4>
+        <p>Available 24/7 — connect instantly.</p>
+        <a href="#" class="info-link" id="open-chat">Open Chat →</a>
+      </div>
+      <div class="info-card glass-card" data-reveal id="info-phone">
+        <div class="info-icon">📞</div>
+        <h4>Phone</h4>
+        <p>Mon–Fri, 9 AM–6 PM EST.</p>
+        <a href="tel:+916206573293" class="info-link">+91 6206573293</a>
+      </div>
+      <div class="info-card glass-card" data-reveal id="info-location">
+        <div class="info-icon">📍</div>
+        <h4>Office</h4>
+        <p>HQ in San Francisco, CA.</p>
+        <span class="info-link">100 Market St, SF, CA 94105</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact-form-section" id="contact-form-section">
+  <div class="container">
+    <div class="contact-layout">
+      <!-- Form -->
+      <div class="form-container glass-card" data-reveal>
+        <span class="section-tag">✉️ Message</span>
+        <h2 style="margin:12px 0 6px;">Send Us a <span class="gradient-text">Message</span></h2>
+        <p style="margin-bottom:32px;">Fill out the form and we'll get back to you within 24 hours.</p>
+
+        <form id="contact-form" onsubmit="submitContact(event)" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cf-name">Full Name *</label>
+              <input type="text" id="cf-name" name="name" placeholder="John Doe" required />
+              <span class="field-err" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="cf-email">Email Address *</label>
+              <input type="email" id="cf-email" name="email" placeholder="john@example.com" required />
+              <span class="field-err" id="err-email"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cf-subject">Subject *</label>
+            <select id="cf-subject" name="subject" required>
+              <option value="">Select a topic…</option>
+              <option>Order Issue</option>
+              <option>Return / Refund</option>
+              <option>Product Question</option>
+              <option>Partnership / Affiliate</option>
+              <option>General Feedback</option>
+              <option>Other</option>
+            </select>
+            <span class="field-err" id="err-subject"></span>
+          </div>
+          <div class="form-group">
+            <label for="cf-order">Order Number (optional)</label>
+            <input type="text" id="cf-order" name="order" placeholder="NX-12345" />
+          </div>
+          <div class="form-group">
+            <label for="cf-message">Message *</label>
+            <textarea id="cf-message" name="message" rows="5" placeholder="Tell us how we can help…" required></textarea>
+            <span class="field-err" id="err-message"></span>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label" for="cf-newsletter">
+              <input type="checkbox" id="cf-newsletter" name="newsletter" />
+              <span>Subscribe to our newsletter for exclusive deals</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" id="cf-submit" style="width:100%;">
+            Send Message →
+          </button>
+        </form>
+      </div>
+
+      <!-- FAQ -->
+      <div class="faq-container" data-reveal>
+        <span class="section-tag">❓ FAQ</span>
+        <h2 style="margin:12px 0 24px;">Common <span class="gradient-text">Questions</span></h2>
+        <div class="accordion" id="faq-accordion">
+          <div class="acc-item" id="faq-1">
+            <button class="acc-trigger" aria-expanded="false">How long does shipping take?</button>
+            <div class="acc-body"><p>Standard shipping: 3–5 business days. Express: 1–2 business days. Orders placed before 2 PM ship same day. Free on orders over $50.</p></div>
+          </div>
+          <div class="acc-item" id="faq-2">
+            <button class="acc-trigger" aria-expanded="false">What is your return policy?</button>
+            <div class="acc-body"><p>We offer a 30-day no-questions-asked return policy. Items must be in original condition. Refunds processed within 3–5 business days.</p></div>
+          </div>
+          <div class="acc-item" id="faq-3">
+            <button class="acc-trigger" aria-expanded="false">Do you ship internationally?</button>
+            <div class="acc-body"><p>Yes! We ship to 40+ countries. International delivery takes 7–14 business days. Customs fees may apply depending on your country.</p></div>
+          </div>
+          <div class="acc-item" id="faq-4">
+            <button class="acc-trigger" aria-expanded="false">How do I track my order?</button>
+            <div class="acc-body"><p>You'll receive an email with a tracking link once your order ships. You can also track orders using your order number on our tracking page.</p></div>
+          </div>
+          <div class="acc-item" id="faq-5">
+            <button class="acc-trigger" aria-expanded="false">Are your products genuine?</button>
+            <div class="acc-body"><p>Absolutely. We source directly from manufacturers and authorized distributors. Every product comes with the original manufacturer warranty.</p></div>
+          </div>
+          <div class="acc-item" id="faq-6">
+            <button class="acc-trigger" aria-expanded="false">How does the Affiliate program work?</button>
+            <div class="acc-body"><p>Sign up as an affiliate, share your unique link, and earn 8% commission on every sale. Payments are made monthly via PayPal or bank transfer. <a href="affiliate-disclosure.html" style="color:var(--accent-2);">Learn more →</a></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">⚡ Nexus</a>
+        <p>Premium products, unmatched experience.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link">𝕏</a><a href="#" class="social-link">📸</a>
+          <a href="#" class="social-link">f</a><a href="#" class="social-link">▶</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul>
+        <li><a href="products.html">All Products</a></li><li><a href="products.html?cat=tech">Tech</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Nexus Store. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<div id="global-toast" class="toast"></div>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>

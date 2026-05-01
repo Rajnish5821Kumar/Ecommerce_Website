@@ -1,0 +1,138 @@
+/* === PRODUCTS PAGE JS === */
+
+const ALL_PRODUCTS = [
+  // Tech
+  { id:1,  name:'UltraBook Pro 15',         price:1299, oldPrice:1599, rating:4.9, reviews:880,  emoji:'💻', cat:'tech',      badge:'badge-violet', badgeText:'Best Seller', desc:'Intel i9, 32GB RAM, 4K OLED display.' },
+  { id:2,  name:'NexPad Wireless Charger',  price:49,  oldPrice:79,   rating:4.7, reviews:2100, emoji:'🔋', cat:'tech',      badge:'badge-green',  badgeText:'Sale',        desc:'15W fast charge, Qi compatible, sleek design.' },
+  { id:3,  name:'PixelMouse Pro',           price:79,  oldPrice:109,  rating:4.8, reviews:640,  emoji:'🖱️', cat:'tech',      badge:'badge-cyan',   badgeText:'New',         desc:'8000 DPI, silent clicks, ergonomic shape.' },
+  { id:4,  name:'SmartHub 7-in-1 USB-C',   price:59,  oldPrice:89,   rating:4.6, reviews:1350, emoji:'🔌', cat:'tech',      badge:'badge-amber',  badgeText:'Hot',         desc:'HDMI 4K, 3x USB-A, SD card reader.' },
+  // Audio
+  { id:5,  name:'ProAir X Earbuds',         price:89,  oldPrice:129,  rating:4.8, reviews:1240, emoji:'🎧', cat:'audio',     badge:'badge-violet', badgeText:'Best Seller', desc:'ANC, 36h battery, IPX5 waterproof.' },
+  { id:6,  name:'BassBlast Speaker',        price:149, oldPrice:199,  rating:4.7, reviews:530,  emoji:'🔊', cat:'audio',     badge:'badge-amber',  badgeText:'Hot Deal',    desc:'360° sound, 24h playtime, waterproof.' },
+  { id:7,  name:'StudioMic USB',            price:109, oldPrice:149,  rating:4.9, reviews:760,  emoji:'🎙️', cat:'audio',     badge:'badge-green',  badgeText:'Top Rated',   desc:'Cardioid condenser, 192kHz, plug & play.' },
+  { id:8,  name:'SonicWrap Headphones',     price:199, oldPrice:279,  rating:4.8, reviews:420,  emoji:'🎵', cat:'audio',     badge:'badge-cyan',   badgeText:'New',         desc:'Planar magnetic drivers, 50mm, foldable.' },
+  // Wearables
+  { id:9,  name:'NexWatch Ultra',           price:199, oldPrice:279,  rating:4.9, reviews:890,  emoji:'⌚', cat:'wearables', badge:'badge-cyan',   badgeText:'New Arrival', desc:'Health tracking, GPS, AMOLED.' },
+  { id:10, name:'FitBand Pro X',            price:69,  oldPrice:99,   rating:4.6, reviews:1820, emoji:'📿', cat:'wearables', badge:'badge-green',  badgeText:'Sale',        desc:'Heart rate, SpO2, 14-day battery.' },
+  { id:11, name:'SmartRing Health',         price:299, oldPrice:399,  rating:4.8, reviews:310,  emoji:'💍', cat:'wearables', badge:'badge-violet', badgeText:'Premium',     desc:'Continuous health monitoring, titanium.' },
+  { id:12, name:'AR Glasses Lite',          price:449, oldPrice:599,  rating:4.5, reviews:180,  emoji:'🥽', cat:'wearables', badge:'badge-amber',  badgeText:'Featured',    desc:'25° FoV, 3h battery, lightweight 35g.' },
+  // Gaming
+  { id:13, name:'MechaKey RGB Keyboard',   price:119, oldPrice:159,  rating:4.7, reviews:632,  emoji:'⌨️', cat:'gaming',    badge:'badge-amber',  badgeText:'Hot Deal',    desc:'Tactile switches, per-key RGB, aluminum.' },
+  { id:14, name:'ProPad Elite Controller', price:89,  oldPrice:119,  rating:4.8, reviews:940,  emoji:'🎮', cat:'gaming',    badge:'badge-violet', badgeText:'Best Seller', desc:'Hall-effect sticks, 40h battery, PC+Console.' },
+  { id:15, name:'TrackX Gaming Mouse',     price:69,  oldPrice:99,   rating:4.9, reviews:1500, emoji:'🖲️', cat:'gaming',    badge:'badge-green',  badgeText:'Top Rated',   desc:'16000 DPI, 7 buttons, ultralight 58g.' },
+  { id:16, name:'SuroundX Gaming Headset', price:99,  oldPrice:139,  rating:4.7, reviews:720,  emoji:'🎯', cat:'gaming',    badge:'badge-cyan',   badgeText:'New',         desc:'7.1 surround, memory foam, retractable mic.' },
+  // Lifestyle
+  { id:17, name:'AirPurify Pro',           price:179, oldPrice:249,  rating:4.8, reviews:540,  emoji:'🌿', cat:'lifestyle', badge:'badge-green',  badgeText:'Eco Pick',    desc:'HEPA H13, 600sqft coverage, app-controlled.' },
+  { id:18, name:'DeskOrganizer Bamboo',    price:39,  oldPrice:59,   rating:4.6, reviews:1200, emoji:'🪴', cat:'lifestyle', badge:'badge-amber',  badgeText:'Sale',        desc:'Sustainable bamboo, 6 compartments.' },
+  { id:19, name:'LightBar Sunrise Alarm',  price:89,  oldPrice:119,  rating:4.7, reviews:870,  emoji:'☀️', cat:'lifestyle', badge:'badge-violet', badgeText:'Featured',    desc:'Gradual sunrise, Spotify, 20 sound modes.' },
+  { id:20, name:'HydroTrack Smart Bottle', price:49,  oldPrice:69,   rating:4.5, reviews:2300, emoji:'💧', cat:'lifestyle', badge:'badge-cyan',   badgeText:'Popular',     desc:'LED hydration reminder, 600ml, BPA-free.' },
+  // Camera
+  { id:21, name:'LumaCam 4K Action',       price:249, oldPrice:349,  rating:4.8, reviews:415,  emoji:'📷', cat:'camera',    badge:'badge-green',  badgeText:'Sale',        desc:'4K60fps, 30m waterproof, stabilization.' },
+  { id:22, name:'SnapDrone Mini 4K',       price:399, oldPrice:549,  rating:4.7, reviews:260,  emoji:'🚁', cat:'camera',    badge:'badge-violet', badgeText:'Premium',     desc:'4K HDR, 30min flight, obstacle avoidance.' },
+  { id:23, name:'VlogKit Wide-Angle Lens', price:79,  oldPrice:109,  rating:4.6, reviews:680,  emoji:'🔭', cat:'camera',    badge:'badge-amber',  badgeText:'Hot',         desc:'17mm equivalent, 4K compatible, clip-on.' },
+  { id:24, name:'TripodFlex Carbon',       price:119, oldPrice:159,  rating:4.8, reviews:490,  emoji:'📸', cat:'camera',    badge:'badge-cyan',   badgeText:'New',         desc:'Carbon fibre, 2kg load, 180° ball head.' },
+];
+
+let filtered = [...ALL_PRODUCTS];
+let activeCat = 'all';
+let searchQuery = '';
+let sortBy = 'featured';
+
+function renderProducts() {
+  let list = ALL_PRODUCTS.filter(p => {
+    const matchCat = activeCat === 'all' || p.cat === activeCat;
+    const matchSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+    return matchCat && matchSearch;
+  });
+
+  if (sortBy === 'price-asc')  list.sort((a,b) => a.price - b.price);
+  if (sortBy === 'price-desc') list.sort((a,b) => b.price - a.price);
+  if (sortBy === 'rating')     list.sort((a,b) => b.rating - a.rating);
+  if (sortBy === 'newest')     list.sort((a,b) => b.id - a.id);
+
+  const grid = document.getElementById('products-grid');
+  const empty = document.getElementById('empty-state');
+  const cnt   = document.getElementById('count-label');
+
+  cnt.textContent = list.length;
+
+  if (!list.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  grid.innerHTML = list.map((p, i) => {
+    const save = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
+    return `
+      <div class="p-card" id="p-card-${p.id}" style="animation-delay:${i * 0.04}s">
+        <div class="p-img">${p.emoji}</div>
+        <div class="p-body">
+          <div class="p-meta">
+            <span class="badge ${p.badge}">${p.badgeText}</span>
+            <span class="p-rating">⭐ ${p.rating}</span>
+          </div>
+          <div class="p-name">${p.name}</div>
+          <div class="p-desc">${p.desc}</div>
+          <div class="p-price">
+            <span class="p-price-now">$${p.price}</span>
+            <span class="p-price-old">$${p.oldPrice}</span>
+            <span class="p-save">-${save}%</span>
+          </div>
+        </div>
+        <div class="p-actions">
+          <button class="p-add-btn" onclick="addToCart('${p.name.replace(/'/g,"\\'")}', ${p.price})" id="add-${p.id}">
+            🛒 Add to Cart
+          </button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function resetFilters() {
+  activeCat = 'all';
+  searchQuery = '';
+  sortBy = 'featured';
+  document.getElementById('search-input').value = '';
+  document.getElementById('sort-select').value = 'featured';
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-cat="all"]').classList.add('active');
+  renderProducts();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Check URL params for category
+  const params = new URLSearchParams(location.search);
+  const urlCat = params.get('cat');
+  if (urlCat) {
+    activeCat = urlCat;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    const btn = document.querySelector(`[data-cat="${urlCat}"]`);
+    if (btn) btn.classList.add('active');
+  }
+
+  renderProducts();
+
+  // Filter pills
+  document.querySelectorAll('.pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      renderProducts();
+    });
+  });
+
+  // Search
+  document.getElementById('search-input').addEventListener('input', e => {
+    searchQuery = e.target.value.trim().toLowerCase();
+    renderProducts();
+  });
+
+  // Sort
+  document.getElementById('sort-select').addEventListener('change', e => {
+    sortBy = e.target.value;
+    renderProducts();
+  });
+});

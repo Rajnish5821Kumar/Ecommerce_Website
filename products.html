@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products — Nexus Store | Shop Premium Tech & Lifestyle</title>
+  <meta name="description" content="Browse 850+ premium products. Filter by category, sort by price, and find the best deals at Nexus Store." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/products.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ Nexus</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="products.html" class="nav-cta">🛒 Cart <span class="cart-count" style="display:none;background:#f59e0b;color:#000;font-size:.65rem;font-weight:800;padding:1px 5px;border-radius:100px;margin-left:4px;">0</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Products</span></div>
+    <span class="section-tag">🛍️ All Products</span>
+    <h1>Our <span class="gradient-text">Collection</span></h1>
+    <p style="color:var(--text-secondary);max-width:500px;margin:.8rem auto 0;">
+      850+ curated products across tech, audio, gaming, lifestyle and more.
+    </p>
+  </div>
+</div>
+
+<!-- PRODUCTS MAIN -->
+<section class="products-section" id="products-main">
+  <div class="container">
+    <!-- Search + Sort Bar -->
+    <div class="products-toolbar" id="products-toolbar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search products…" aria-label="Search products" />
+      </div>
+      <div class="filter-pills" id="filter-pills">
+        <button class="pill active" data-cat="all" id="filter-all">All</button>
+        <button class="pill" data-cat="tech"      id="filter-tech">💻 Tech</button>
+        <button class="pill" data-cat="audio"     id="filter-audio">🎧 Audio</button>
+        <button class="pill" data-cat="wearables" id="filter-wearables">⌚ Wearables</button>
+        <button class="pill" data-cat="gaming"    id="filter-gaming">🎮 Gaming</button>
+        <button class="pill" data-cat="lifestyle" id="filter-lifestyle">🌿 Lifestyle</button>
+        <button class="pill" data-cat="camera"    id="filter-camera">📷 Camera</button>
+      </div>
+      <div class="sort-wrap">
+        <select id="sort-select" aria-label="Sort products">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="rating">Top Rated</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results count -->
+    <div class="results-meta" id="results-meta">Showing <strong id="count-label">24</strong> products</div>
+
+    <!-- Grid -->
+    <div class="products-grid" id="products-grid"></div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <span class="empty-icon">😕</span>
+      <h3>No products found</h3>
+      <p>Try a different search or filter.</p>
+      <button class="btn btn-outline" onclick="resetFilters()" id="reset-filters-btn">Reset Filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">⚡ Nexus</a>
+        <p>Premium products, unmatched experience. Shop with confidence.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link">𝕏</a>
+          <a href="#" class="social-link">📸</a>
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">▶</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul>
+        <li><a href="products.html">All Products</a></li>
+        <li><a href="products.html?cat=tech">Tech</a></li>
+        <li><a href="products.html?cat=audio">Audio</a></li>
+        <li><a href="products.html?cat=gaming">Gaming</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Nexus Store. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="global-toast" class="toast"></div>
+<script src="js/main.js"></script>
+<script src="js/products.js"></script>
+</body>
+</html>

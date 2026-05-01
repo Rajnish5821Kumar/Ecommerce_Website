@@ -1,0 +1,151 @@
+/* === ABOUT PAGE === */
+.mission-section { padding: 80px 0; }
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.mission-content p { font-size: 0.97rem; line-height: 1.8; }
+.mission-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+.m-stat { text-align: center; }
+.m-num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.m-lbl { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.about-card { padding: 28px; }
+.about-card-icon { font-size: 2rem; margin-bottom: 12px; }
+.about-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.about-card p { font-size: 0.88rem; }
+
+/* Timeline */
+.timeline-section { padding: 80px 0; }
+.timeline { position: relative; max-width: 760px; margin: 0 auto; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+  transform: translateX(-50%);
+}
+.tl-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+.tl-item.left  { flex-direction: row-reverse; }
+.tl-item.right { flex-direction: row; }
+.tl-content {
+  width: calc(50% - 40px);
+  padding: 24px;
+}
+.tl-item.left  .tl-content { margin-right: auto; text-align: right; }
+.tl-item.right .tl-content { margin-left: auto; text-align: left; }
+.tl-year {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent-2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.tl-content h4 { font-size: 1rem; margin-bottom: 6px; }
+.tl-content p { font-size: 0.84rem; }
+.tl-dot {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px; height: 14px;
+  background: var(--accent-1);
+  border-radius: 50%;
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 12px rgba(124,58,237,0.6);
+  z-index: 1;
+}
+
+/* Values */
+.values-section { padding: 80px 0; }
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.value-card { padding: 32px 24px; text-align: center; }
+.val-icon { font-size: 2.2rem; margin-bottom: 14px; }
+.value-card h4 { margin-bottom: 8px; }
+.value-card p { font-size: 0.86rem; }
+
+/* Team */
+.team-section { padding: 80px 0; }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.team-card {
+  padding: 32px 20px;
+  text-align: center;
+}
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--accent-grad);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+}
+.team-card h4 { font-size: 1rem; margin-bottom: 4px; }
+.team-role {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent-2);
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.team-card p { font-size: 0.82rem; font-style: italic; }
+
+/* CTA */
+.about-cta-section { padding: 80px 0; }
+.about-cta {
+  padding: 72px 64px;
+  text-align: center;
+}
+.about-cta h2 { font-size: 2.4rem; margin-bottom: 16px; }
+.about-cta p { max-width: 480px; margin: 0 auto; }
+
+@media (max-width: 992px) {
+  .mission-grid { grid-template-columns: 1fr; gap: 40px; }
+  .values-grid  { grid-template-columns: 1fr 1fr; }
+  .team-grid    { grid-template-columns: 1fr 1fr; }
+  .timeline::before { left: 20px; }
+  .tl-item.left, .tl-item.right { flex-direction: column; align-items: flex-start; padding-left: 52px; }
+  .tl-item.left .tl-content, .tl-item.right .tl-content { width: 100%; text-align: left; margin: 0; }
+  .tl-dot { left: 20px; }
+}
+@media (max-width: 600px) {
+  .values-grid { grid-template-columns: 1fr; }
+  .team-grid   { grid-template-columns: 1fr; }
+  .about-cta   { padding: 40px 24px; }
+}

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Store — Premium E-Commerce | Home</title>
+  <meta name="description" content="Nexus Store — Discover cutting-edge tech products, exclusive deals, and a seamless shopping experience." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main Navigation">
+  <div class="container">
+    <a href="index.html" class="logo" id="nav-logo">⚡ Nexus</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li>
+        <a href="products.html" class="nav-cta">
+          🛒 Shop Now
+          <span class="cart-count" id="cart-count" style="
+            display:none; background:#f59e0b; color:#000;
+            font-size:0.65rem; font-weight:800;
+            padding:1px 5px; border-radius:100px;
+            margin-left:4px;
+          ">0</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge animate-fade-up">
+        <span class="pulse-dot"></span>
+        New arrivals every week
+      </div>
+      <h1 class="animate-fade-up delay-1">
+        Shop the Future<br/>
+        <span class="gradient-text">One Click Away</span>
+      </h1>
+      <p class="hero-sub animate-fade-up delay-2">
+        Discover premium tech, lifestyle products, and exclusive drops curated for those who refuse to settle for ordinary.
+      </p>
+      <div class="hero-actions animate-fade-up delay-3">
+        <a href="products.html" class="btn btn-primary btn-lg" id="hero-shop-btn">
+          Explore Products <span>→</span>
+        </a>
+        <a href="about.html" class="btn btn-outline btn-lg" id="hero-about-btn">
+          Our Story
+        </a>
+      </div>
+      <div class="hero-stats animate-fade-up delay-4">
+        <div class="stat">
+          <span class="stat-num" data-count="12000" data-suffix="+">0+</span>
+          <span class="stat-label">Happy Customers</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="850" data-suffix="+">0+</span>
+          <span class="stat-label">Products</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-count="99" data-suffix="%">0%</span>
+          <span class="stat-label">Satisfaction Rate</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual animate-fade-up delay-2">
+      <div class="hero-mockup">
+        <div class="mockup-screen">
+          <div class="mockup-ui">
+            <div class="mockup-topbar">
+              <div class="mockup-dots"><span></span><span></span><span></span></div>
+              <div class="mockup-search"></div>
+            </div>
+            <div class="mockup-grid">
+              <div class="mockup-card mc1"></div>
+              <div class="mockup-card mc2"></div>
+              <div class="mockup-card mc3"></div>
+              <div class="mockup-card mc4"></div>
+            </div>
+            <div class="mockup-bar"></div>
+          </div>
+        </div>
+        <div class="float-badge fb1">🔥 Hot Deal</div>
+        <div class="float-badge fb2">⭐ 4.9 Rating</div>
+        <div class="float-badge fb3">🚚 Free Shipping</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE STRIP ===== -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>🔥 Free Shipping on Orders Over $50</span>
+    <span>⚡ Flash Sale — Up to 60% Off</span>
+    <span>🛡️ 30-Day Money Back Guarantee</span>
+    <span>🎁 Gift Cards Available</span>
+    <span>🌟 New Arrivals Every Week</span>
+    <span>🔒 Secure Checkout</span>
+    <span>🔥 Free Shipping on Orders Over $50</span>
+    <span>⚡ Flash Sale — Up to 60% Off</span>
+    <span>🛡️ 30-Day Money Back Guarantee</span>
+    <span>🎁 Gift Cards Available</span>
+    <span>🌟 New Arrivals Every Week</span>
+    <span>🔒 Secure Checkout</span>
+  </div>
+</div>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories-section" id="categories">
+  <div class="container">
+    <div class="section-header center" data-reveal>
+      <span class="section-tag">✦ Browse</span>
+      <h2 class="section-title">Shop by <span class="gradient-text">Category</span></h2>
+      <p class="section-subtitle">Handpicked collections to match every lifestyle and budget.</p>
+    </div>
+    <div class="categories-grid" id="categories-grid">
+      <a href="products.html?cat=tech" class="cat-card glass-card" id="cat-tech" data-reveal>
+        <div class="cat-icon">💻</div>
+        <h3>Tech & Gadgets</h3>
+        <p>Latest devices & accessories</p>
+        <span class="cat-count">240+ items</span>
+      </a>
+      <a href="products.html?cat=audio" class="cat-card glass-card" id="cat-audio" data-reveal>
+        <div class="cat-icon">🎧</div>
+        <h3>Audio</h3>
+        <p>Headphones, speakers & earbuds</p>
+        <span class="cat-count">130+ items</span>
+      </a>
+      <a href="products.html?cat=wearables" class="cat-card glass-card" id="cat-wearables" data-reveal>
+        <div class="cat-icon">⌚</div>
+        <h3>Wearables</h3>
+        <p>Smartwatches & fitness trackers</p>
+        <span class="cat-count">95+ items</span>
+      </a>
+      <a href="products.html?cat=gaming" class="cat-card glass-card" id="cat-gaming" data-reveal>
+        <div class="cat-icon">🎮</div>
+        <h3>Gaming</h3>
+        <p>Controllers, headsets & more</p>
+        <span class="cat-count">180+ items</span>
+      </a>
+      <a href="products.html?cat=lifestyle" class="cat-card glass-card" id="cat-lifestyle" data-reveal>
+        <div class="cat-icon">🌿</div>
+        <h3>Lifestyle</h3>
+        <p>Wellness & home essentials</p>
+        <span class="cat-count">200+ items</span>
+      </a>
+      <a href="products.html?cat=camera" class="cat-card glass-card" id="cat-camera" data-reveal>
+        <div class="cat-icon">📷</div>
+        <h3>Camera & Photo</h3>
+        <p>Cameras, lenses & accessories</p>
+        <span class="cat-count">110+ items</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="featured-section" id="featured">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <span class="section-tag">⭐ Best Sellers</span>
+      <h2 class="section-title">Trending <span class="gradient-text">Right Now</span></h2>
+      <p class="section-subtitle">Products our community loves most this month.</p>
+    </div>
+    <div class="featured-grid" id="featured-grid"></div>
+    <div class="section-cta" data-reveal>
+      <a href="products.html" class="btn btn-outline btn-lg" id="view-all-btn">View All Products →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROMO BANNER ===== -->
+<section class="promo-section" id="promo">
+  <div class="container">
+    <div class="promo-card glass-card" data-reveal>
+      <div class="promo-content">
+        <span class="badge badge-amber">⚡ Limited Time</span>
+        <h2>Flash Sale — <span class="gradient-text">60% Off</span> Today Only</h2>
+        <p>Grab the hottest deals before they're gone. No code needed — discount applied at checkout.</p>
+        <a href="products.html" class="btn btn-primary btn-lg" id="promo-btn">Shop the Sale →</a>
+      </div>
+      <div class="promo-visual">
+        <div class="promo-circle">
+          <span class="promo-pct">60%</span>
+          <span class="promo-off">OFF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY NEXUS ===== -->
+<section class="why-section" id="why-nexus">
+  <div class="container">
+    <div class="section-header center" data-reveal>
+      <span class="section-tag">✦ Why Us</span>
+      <h2 class="section-title">Why Choose <span class="gradient-text">Nexus?</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card glass-card" data-reveal>
+        <div class="why-icon">🚀</div>
+        <h4>Lightning Fast Delivery</h4>
+        <p>Same-day dispatch on orders placed before 2 PM. Free shipping over $50.</p>
+      </div>
+      <div class="why-card glass-card" data-reveal>
+        <div class="why-icon">🔒</div>
+        <h4>Secure Payments</h4>
+        <p>256-bit SSL encryption. We accept all major cards, PayPal, and crypto.</p>
+      </div>
+      <div class="why-card glass-card" data-reveal>
+        <div class="why-icon">🔄</div>
+        <h4>30-Day Returns</h4>
+        <p>No questions asked. Return or exchange anything within 30 days.</p>
+      </div>
+      <div class="why-card glass-card" data-reveal>
+        <div class="why-icon">🌟</div>
+        <h4>Premium Quality</h4>
+        <p>Every product is hand-tested by our quality assurance team.</p>
+      </div>
+      <div class="why-card glass-card" data-reveal>
+        <div class="why-icon">💬</div>
+        <h4>24/7 Support</h4>
+        <p>Real humans available around the clock via chat, email & phone.</p>
+      </div>
+      <div class="why-card glass-card" data-reveal>
+        <div class="why-icon">🎁</div>
+        <h4>Rewards Program</h4>
+        <p>Earn 2x points on every purchase. Redeem for discounts and free products.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header center" data-reveal>
+      <span class="section-tag">💬 Reviews</span>
+      <h2 class="section-title">Loved by <span class="gradient-text">Thousands</span></h2>
+    </div>
+    <div class="testimonials-grid" id="testimonials-grid"></div>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="newsletter-card glass-card" data-reveal>
+      <div class="nl-content">
+        <span class="section-tag">📩 Newsletter</span>
+        <h2>Get Exclusive Deals <span class="gradient-text">First</span></h2>
+        <p>Join 50,000+ subscribers and never miss a flash sale or new drop.</p>
+      </div>
+      <form class="nl-form" id="nl-form" onsubmit="handleNewsletter(event)">
+        <input type="email" id="nl-email" placeholder="Enter your email address…" required aria-label="Email for newsletter" />
+        <button type="submit" class="btn btn-primary" id="nl-submit-btn">Subscribe Free →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">⚡ Nexus</a>
+        <p>Premium products, unmatched experience. Shop with confidence, delivered with care.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="Instagram">📸</a>
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html?cat=tech">Tech & Gadgets</a></li>
+          <li><a href="products.html?cat=audio">Audio</a></li>
+          <li><a href="products.html?cat=gaming">Gaming</a></li>
+          <li><a href="products.html?sale=true">Sale Items</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html#careers">Careers</a></li>
+          <li><a href="about.html#press">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Nexus Store. All rights reserved.</span>
+      <span>Made with ❤️ for amazing shoppers</span>
+    </div>
+  </div>
+</footer>
+
+<div id="global-toast" class="toast"></div>
+
+<script src="js/main.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
