@@ -1,6 +1,6 @@
-/* === PRODUCTS PAGE JS === */
-
-const WOMENS_DRESS_LINK = 'https://amzn.to/49b5Rfh';
+const WOMENS_LINK = 'https://amzn.to/49b5Rfh';
+const MENS_LINK   = 'https://amzn.to/3QIJmYN';
+const KIDS_LINK   = 'https://amzn.to/4enH8Ig';
 
 const ALL_PRODUCTS = [
   // Tech
@@ -33,8 +33,18 @@ const ALL_PRODUCTS = [
   { id:22, name:'SnapDrone Mini 4K',       price:399, oldPrice:549,  rating:4.7, reviews:260,  emoji:'🚁', cat:'camera',    badge:'badge-violet', badgeText:'Premium',     desc:'4K HDR, 30min flight, obstacle avoidance.' },
   { id:23, name:'VlogKit Wide-Angle Lens', price:79,  oldPrice:109,  rating:4.6, reviews:680,  emoji:'🔭', cat:'camera',    badge:'badge-amber',  badgeText:'Hot',         desc:'17mm equivalent, 4K compatible, clip-on.' },
   { id:24, name:'TripodFlex Carbon',       price:119, oldPrice:159,  rating:4.8, reviews:490,  emoji:'📸', cat:'camera',    badge:'badge-cyan',   badgeText:'New',         desc:'Carbon fibre, 2kg load, 180° ball head.' },
-  // Women's Dresses
-  { id:25, name:"Women's Dress Collection", price:null, oldPrice:null, rating:4.7, reviews:520, emoji:'👗', cat:'women-dresses', badge:'badge-cyan', badgeText:'New Section', desc:'Curated dress styles for everyday wear, parties and special occasions.', affiliateUrl:WOMENS_DRESS_LINK, ctaText:'Shop on Amazon', priceLabel:'View offer' },
+  // Women's Fashion
+  { id:25, name:"Women's Dresses",          price:null, oldPrice:null, rating:4.8, reviews:1240, emoji:'👗', cat:'women-fashion', badge:'badge-pink',   badgeText:"Women's Pick",  desc:'Sarees, kurtis, dresses & tops — everyday wear to party outfits.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:26, name:"Women's Ethnic Wear",      price:null, oldPrice:null, rating:4.7, reviews:980,  emoji:'🤱‍♀️', cat:'women-fashion', badge:'badge-pink',   badgeText:'Trending',       desc:'Lehengas, anarkalis & salwar suits curated for every occasion.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:27, name:"Women's Western Tops",     price:null, oldPrice:null, rating:4.6, reviews:760,  emoji:'💜', cat:'women-fashion', badge:'badge-cyan',   badgeText:'New Arrivals',   desc:'Casual and formal tops, blouses & shirts in premium fabrics.', affiliateUrl:WOMENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  // Men's Fashion
+  { id:28, name:"Men's Formal Shirts",      price:null, oldPrice:null, rating:4.8, reviews:1450, emoji:'👔', cat:'men-fashion', badge:'badge-blue',   badgeText:"Men's Pick",    desc:'Crisp formal & semi-formal shirts for office and events.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:29, name:"Men's Ethnic Wear",        price:null, oldPrice:null, rating:4.7, reviews:830,  emoji:'👺', cat:'men-fashion', badge:'badge-violet', badgeText:'Trending',       desc:'Kurtas, sherwanis & dhoti sets for festive and wedding looks.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:30, name:"Men's Casual & Sports",    price:null, oldPrice:null, rating:4.6, reviews:1100, emoji:'🏃', cat:'men-fashion', badge:'badge-green',  badgeText:'Active Wear',    desc:'T-shirts, joggers, track pants & hoodies for everyday comfort.', affiliateUrl:MENS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  // Kids' Fashion
+  { id:31, name:"Kids' Clothing Set",       price:null, oldPrice:null, rating:4.9, reviews:2100, emoji:'🧒', cat:'kids-fashion', badge:'badge-amber', badgeText:"Kids' Pick",    desc:'Fun & colourful clothing sets for boys and girls (2–12 yrs).', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:32, name:"Kids' Ethnic Wear",        price:null, oldPrice:null, rating:4.7, reviews:640,  emoji:'🌸', cat:'kids-fashion', badge:'badge-pink',   badgeText:'Festival Ready', desc:'Tiny lehengas, sherwanis & traditional sets for celebrations.', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  { id:33, name:"Baby & Toddler Essentials",price:null, oldPrice:null, rating:4.8, reviews:890,  emoji:'🍭', cat:'kids-fashion', badge:'badge-cyan',   badgeText:'Adorable',       desc:'Rompers, sleepsuits & accessories for 0–3 year olds.', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
 ];
 
 let filtered = [...ALL_PRODUCTS];
