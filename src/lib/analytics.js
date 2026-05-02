@@ -54,3 +54,26 @@ export async function unlockAnalyticsDashboard(code) {
   }
   return data;
 }
+
+export async function downloadAnalyticsWorkbook(code) {
+  const response = await fetch('/api/analytics/export', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code })
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || 'Unable to download analytics workbook');
+  }
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = 'rajnish-store-analytics.xlsx';
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}

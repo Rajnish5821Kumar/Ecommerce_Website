@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: rajnish-store
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm run serve
+    healthCheckPath: /api/analytics/health
+    autoDeployTrigger: commit
+    disk:
+      name: analytics-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 5
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ANALYTICS_CODE
+        sync: false
+      - key: ANALYTICS_DATA_DIR
+        value: /opt/render/project/src/data
+      - key: ANALYTICS_MAX_EVENTS
+        value: 10000

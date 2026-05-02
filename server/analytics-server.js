@@ -1,3 +1,4 @@
+import ExcelJS from 'exceljs';
 import express from 'express';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -7,21 +8,53 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.join(rootDir, 'dist');
-const dataDir = path.join(rootDir, 'data');
-const eventsFile = path.join(dataDir, 'analytics-events.json');
+const dataDir = process.env.ANALYTICS_DATA_DIR
+  ? path.resolve(process.env.ANALYTICS_DATA_DIR)
+  : path.join(rootDir, 'data');
+const eventsWorkbookFile = path.join(dataDir, 'analytics-events.xlsx');
+const legacyEventsFile = path.join(dataDir, 'analytics-events.json');
 const cacheFile = path.join(dataDir, 'ip-location-cache.json');
 const port = Number(process.env.PORT || 8080);
+const host = process.env.HOST || '0.0.0.0';
 const dashboardCode = process.env.ANALYTICS_CODE || 'XYZQ';
 const maxEvents = Number(process.env.ANALYTICS_MAX_EVENTS || 10000);
 
+const eventColumns = [
+  { header: 'ID', key: 'id', width: 24 },
+  { header: 'Received At', key: 'receivedAt', width: 25 },
+  { header: 'Type', key: 'type', width: 24 },
+  { header: 'IP', key: 'ip', width: 18 },
+  { header: 'Location Status', key: 'locationStatus', width: 18 },
+  { header: 'Location IP', key: 'locationIp', width: 18 },
+  { header: 'City', key: 'city', width: 20 },
+  { header: 'Region', key: 'region', width: 22 },
+  { header: 'Country', key: 'country', width: 20 },
+  { header: 'Timezone', key: 'timezone', width: 24 },
+  { header: 'ISP', key: 'isp', width: 32 },
+  { header: 'Latitude', key: 'latitude', width: 14 },
+  { header: 'Longitude', key: 'longitude', width: 14 },
+  { header: 'Page Route', key: 'path', width: 24 },
+  { header: 'Label', key: 'label', width: 32 },
+  { header: 'Href', key: 'href', width: 50 },
+  { header: 'Category', key: 'category', width: 18 },
+  { header: 'Product ID', key: 'productId', width: 20 },
+  { header: 'Visitor ID', key: 'visitorId', width: 42 },
+  { header: 'Page Title', key: 'pageTitle', width: 36 },
+  { header: 'Referer', key: 'referer', width: 50 },
+  { header: 'User Agent', key: 'userAgent', width: 70 },
+  { header: 'Meta JSON', key: 'metaJson', width: 40 }
+];
+
 const app = express();
+let eventWriteQueue = Promise.resolve();
+
 app.set('trust proxy', true);
 app.use(express.json({ limit: '64kb' }));
 
 async function ensureDataFiles() {
   await fs.mkdir(dataDir, { recursive: true });
   await Promise.all([
-    ensureJsonFile(eventsFile, []),
+    ensureEventsWorkbook(),
     ensureJsonFile(cacheFile, {})
   ]);
 }
@@ -31,6 +64,15 @@ async function ensureJsonFile(filePath, fallback) {
     await fs.access(filePath);
   } catch {
     await fs.writeFile(filePath, JSON.stringify(fallback, null, 2));
+  }
+}
+
+async function ensureEventsWorkbook() {
+  try {
+    await fs.access(eventsWorkbookFile);
+  } catch {
+    const legacyEvents = await readJson(legacyEventsFile, []);
+    await writeEventsWorkbook(Array.isArray(legacyEvents) ? legacyEvents : []);
   }
 }
 
@@ -165,6 +207,167 @@ function sanitizeMeta(value, depth = 0) {
   return String(value).slice(0, 120);
 }
 
+function stringifyJson(value) {
+  try {
+    return JSON.stringify(value ?? {});
+  } catch {
+    return '{}';
+  }
+}
+
+function parseJson(value, fallback) {
+  try {
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function parseNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function cellText(value) {
+  if (value == null) return '';
+  if (value instanceof Date) return value.toISOString();
+  if (typeof value === 'object') {
+    if ('text' in value) return String(value.text ?? '');
+    if ('result' in value) return String(value.result ?? '');
+    if (Array.isArray(value.richText)) {
+      return value.richText.map((part) => part.text || '').join('');
+    }
+    return stringifyJson(value);
+  }
+  return String(value);
+}
+
+function eventToRow(event) {
+  const location = event.location || {};
+  return {
+    id: event.id,
+    receivedAt: event.receivedAt,
+    type: event.type,
+    ip: event.ip,
+    locationStatus: location.status || '',
+    locationIp: location.ip || event.ip || '',
+    city: location.city || '',
+    region: location.region || '',
+    country: location.country || '',
+    timezone: location.timezone || '',
+    isp: location.isp || '',
+    latitude: location.latitude ?? '',
+    longitude: location.longitude ?? '',
+    path: event.path,
+    label: event.label,
+    href: event.href,
+    category: event.category,
+    productId: event.productId,
+    visitorId: event.visitorId,
+    pageTitle: event.pageTitle,
+    referer: event.referer,
+    userAgent: event.userAgent,
+    metaJson: stringifyJson(event.meta)
+  };
+}
+
+function rowToEvent(row) {
+  return {
+    id: row.id,
+    receivedAt: row.receivedAt,
+    ip: row.ip,
+    location: {
+      status: row.locationStatus,
+      ip: row.locationIp || row.ip,
+      city: row.city,
+      region: row.region,
+      country: row.country,
+      timezone: row.timezone,
+      isp: row.isp,
+      latitude: parseNumber(row.latitude),
+      longitude: parseNumber(row.longitude)
+    },
+    userAgent: row.userAgent,
+    referer: row.referer,
+    type: row.type,
+    path: row.path,
+    label: row.label,
+    href: row.href,
+    category: row.category,
+    productId: row.productId,
+    visitorId: row.visitorId,
+    pageTitle: row.pageTitle,
+    meta: parseJson(row.metaJson, {})
+  };
+}
+
+async function readEventsFromWorkbook() {
+  await ensureEventsWorkbook();
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(eventsWorkbookFile);
+  const worksheet = workbook.getWorksheet('Events');
+  if (!worksheet) return [];
+
+  const events = [];
+  worksheet.eachRow({ includeEmpty: false }, (excelRow, rowNumber) => {
+    if (rowNumber === 1) return;
+
+    const row = {};
+    eventColumns.forEach((column, index) => {
+      row[column.key] = cellText(excelRow.getCell(index + 1).value);
+    });
+
+    if (row.id && row.receivedAt) {
+      events.push(rowToEvent(row));
+    }
+  });
+
+  return events;
+}
+
+async function writeEventsWorkbook(events) {
+  const workbook = new ExcelJS.Workbook();
+  workbook.creator = 'Rajnish Store';
+  workbook.created = new Date();
+  workbook.modified = new Date();
+
+  const worksheet = workbook.addWorksheet('Events', {
+    views: [{ state: 'frozen', ySplit: 1 }]
+  });
+
+  worksheet.columns = eventColumns;
+  worksheet.addRows(events.map(eventToRow));
+  worksheet.getRow(1).font = { bold: true, color: { argb: 'FF1F2937' } };
+  worksheet.getRow(1).fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FFF7F2E7' }
+  };
+  worksheet.autoFilter = {
+    from: { row: 1, column: 1 },
+    to: { row: 1, column: eventColumns.length }
+  };
+
+  await workbook.xlsx.writeFile(eventsWorkbookFile);
+}
+
+async function appendEvent(event) {
+  const writeJob = eventWriteQueue.then(async () => {
+    const events = await readEventsFromWorkbook();
+    events.push(event);
+    await writeEventsWorkbook(events.slice(-maxEvents));
+  });
+
+  eventWriteQueue = writeJob.catch(() => {});
+  await writeJob;
+}
+
+async function getStoredEvents() {
+  await eventWriteQueue.catch(() => {});
+  return readEventsFromWorkbook();
+}
+
 async function recordEvent(req, body) {
   const ip = getClientIp(req);
   const location = await getLocationForIp(ip);
@@ -178,10 +381,7 @@ async function recordEvent(req, body) {
     ...sanitizeEventBody(body)
   };
 
-  const events = await readJson(eventsFile, []);
-  events.push(event);
-  const trimmed = events.slice(-maxEvents);
-  await writeJson(eventsFile, trimmed);
+  await appendEvent(event);
   return event;
 }
 
@@ -206,8 +406,13 @@ function summarizeEvents(events) {
     uniqueIps,
     uniqueVisitors,
     topLinks: topLinks.slice(0, 12),
+    workbook: path.basename(eventsWorkbookFile),
     lastUpdated: new Date().toISOString()
   };
+}
+
+function hasValidCode(req) {
+  return req.body?.code === dashboardCode;
 }
 
 app.post('/api/analytics/event', async (req, res) => {
@@ -221,12 +426,12 @@ app.post('/api/analytics/event', async (req, res) => {
 });
 
 app.post('/api/analytics/dashboard', async (req, res) => {
-  if (req.body?.code !== dashboardCode) {
+  if (!hasValidCode(req)) {
     res.status(401).json({ ok: false, error: 'Invalid analytics code' });
     return;
   }
 
-  const events = await readJson(eventsFile, []);
+  const events = await getStoredEvents();
   res.json({
     ok: true,
     summary: summarizeEvents(events),
@@ -234,8 +439,26 @@ app.post('/api/analytics/dashboard', async (req, res) => {
   });
 });
 
+app.post('/api/analytics/export', async (req, res) => {
+  if (!hasValidCode(req)) {
+    res.status(401).json({ ok: false, error: 'Invalid analytics code' });
+    return;
+  }
+
+  await eventWriteQueue.catch(() => {});
+  await ensureEventsWorkbook();
+
+  res.setHeader('Cache-Control', 'no-store');
+  res.download(eventsWorkbookFile, 'rajnish-store-analytics.xlsx');
+});
+
 app.get('/api/analytics/health', (_req, res) => {
-  res.json({ ok: true, storage: path.relative(rootDir, eventsFile) });
+  res.json({
+    ok: true,
+    storage: path.relative(rootDir, eventsWorkbookFile),
+    dataDir,
+    format: 'xlsx'
+  });
 });
 
 app.use(express.static(distDir));
@@ -251,7 +474,7 @@ app.use((req, res, next) => {
 
 await ensureDataFiles();
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`Rajnish Store analytics server running at http://127.0.0.1:${port}/#/`);
-  console.log(`Analytics events are stored in ${path.relative(rootDir, eventsFile)}`);
+  console.log(`Analytics workbook is stored at ${eventsWorkbookFile}`);
 });

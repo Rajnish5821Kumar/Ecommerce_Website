@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrandLogo } from './components/BrandLogo.jsx';
 import { IconoirIcon } from './components/IconoirIcon.jsx';
 import { categories, categoryFilters, featuredProducts, products } from './data/catalog.js';
-import { trackEvent, unlockAnalyticsDashboard } from './lib/analytics.js';
+import { downloadAnalyticsWorkbook, trackEvent, unlockAnalyticsDashboard } from './lib/analytics.js';
 import './styles.css';
 
 const routes = [
@@ -623,6 +623,7 @@ function ContactPage() {
   const [secretClicks, setSecretClicks] = useState(0);
   const [showCodePrompt, setShowCodePrompt] = useState(false);
   const [code, setCode] = useState('');
+  const [dashboardCode, setDashboardCode] = useState('');
   const [dashboard, setDashboard] = useState(null);
   const [dashboardError, setDashboardError] = useState('');
   const [dashboardLoading, setDashboardLoading] = useState(false);
@@ -643,8 +644,10 @@ function ContactPage() {
     setDashboardError('');
     setDashboardLoading(true);
     try {
-      const data = await unlockAnalyticsDashboard(code.trim());
+      const enteredCode = code.trim();
+      const data = await unlockAnalyticsDashboard(enteredCode);
       setDashboard(data);
+      setDashboardCode(enteredCode);
       setShowCodePrompt(false);
       setCode('');
       trackEvent('admin_dashboard_unlocked', { label: 'Analytics dashboard opened' });
@@ -747,7 +750,16 @@ function ContactPage() {
         </div>
       )}
 
-      {dashboard && <AnalyticsDashboard data={dashboard} onClose={() => setDashboard(null)} />}
+      {dashboard && (
+        <AnalyticsDashboard
+          code={dashboardCode}
+          data={dashboard}
+          onClose={() => {
+            setDashboard(null);
+            setDashboardCode('');
+          }}
+        />
+      )}
     </main>
   );
 }
@@ -757,9 +769,25 @@ function formatLocation(location = {}) {
   return parts.length ? parts.join(', ') : location.status === 'local' ? 'Local network' : 'Unknown';
 }
 
-function AnalyticsDashboard({ data, onClose }) {
+function AnalyticsDashboard({ code, data, onClose }) {
+  const [exportLoading, setExportLoading] = useState(false);
+  const [exportError, setExportError] = useState('');
   const summary = data.summary || {};
   const events = data.events || [];
+
+  async function handleWorkbookDownload() {
+    setExportError('');
+    setExportLoading(true);
+    try {
+      await downloadAnalyticsWorkbook(code);
+      trackEvent('admin_dashboard_export', { label: 'Analytics XLSX downloaded' });
+    } catch (error) {
+      setExportError(error.message);
+    } finally {
+      setExportLoading(false);
+    }
+  }
+
   return (
     <div className="fixed inset-0 z-[80] overflow-y-auto bg-charcoal/55 px-4 py-6 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl rounded-3xl border border-line bg-white shadow-soft">
@@ -767,12 +795,23 @@ function AnalyticsDashboard({ data, onClose }) {
           <div>
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-saffronDark">Owner analytics</p>
             <h2 className="mt-1 text-3xl font-extrabold text-charcoal">Rajnish Store access dashboard</h2>
-            <p className="mt-1 text-sm text-slate">Last updated: {summary.lastUpdated ? new Date(summary.lastUpdated).toLocaleString() : 'Now'}</p>
+            <p className="mt-1 text-sm text-slate">
+              Last updated: {summary.lastUpdated ? new Date(summary.lastUpdated).toLocaleString() : 'Now'}
+              {summary.workbook ? ` | Database: ${summary.workbook}` : ''}
+            </p>
           </div>
-          <button type="button" onClick={onClose} className="btn-secondary">
-            Close
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <button type="button" onClick={handleWorkbookDownload} className="btn-primary" disabled={exportLoading}>
+              <IconoirIcon name="download" size={16} />
+              {exportLoading ? 'Preparing...' : 'Download XLSX'}
+            </button>
+            <button type="button" onClick={onClose} className="btn-secondary">
+              Close
+            </button>
+          </div>
         </div>
+
+        {exportError && <p className="mx-5 mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">{exportError}</p>}
 
         <div className="grid gap-4 p-5 sm:grid-cols-2 lg:grid-cols-5">
           {[

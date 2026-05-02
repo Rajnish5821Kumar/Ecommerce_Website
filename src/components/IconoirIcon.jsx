@@ -4,6 +4,7 @@ import arrowUpRight from '../assets/iconoir/arrow-up-right.svg?raw';
 import box from '../assets/iconoir/box.svg?raw';
 import camera from '../assets/iconoir/camera.svg?raw';
 import checkCircle from '../assets/iconoir/check-circle.svg?raw';
+import download from '../assets/iconoir/download.svg?raw';
 import filter from '../assets/iconoir/filter.svg?raw';
 import gamepad from '../assets/iconoir/gamepad.svg?raw';
 import gift from '../assets/iconoir/gift.svg?raw';
@@ -32,6 +33,7 @@ const icons = {
   box,
   camera,
   checkCircle,
+  download,
   filter,
   gamepad,
   gift,
