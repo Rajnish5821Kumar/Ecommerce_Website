@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Products — Rajnish Store | Shop Premium Tech, Lifestyle & Fashion</title>
-  <meta name="description" content="Browse 850+ premium products, including tech, lifestyle, fashion and women's dresses. Filter by category, sort by price, and find the best deals at Rajnish Store." />
+  <meta name="description" content="Browse 850+ premium products, including tech, lifestyle, fashion, groceries, dry fruits and women's dresses. Filter by category, sort by price, and find the best deals at Rajnish Store." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/products.css" />
 </head>
@@ -32,7 +32,7 @@
     <span class="section-tag">🛍️ All Products</span>
     <h1>Our <span class="gradient-text">Collection</span></h1>
     <p style="color:var(--text-secondary);max-width:500px;margin:.8rem auto 0;">
-      850+ curated products across tech, audio, gaming, lifestyle, fashion and more.
+      850+ curated products across tech, audio, gaming, lifestyle, fashion, groceries and more.
     </p>
   </div>
 </div>
@@ -102,6 +102,54 @@
   </div>
 </section>
 
+<!-- GROCERY ESSENTIALS -->
+<section class="shop-banners" id="grocery-banners">
+  <div class="container">
+    <div class="shop-banners-header">
+      <span class="section-tag">🛒 Daily Needs</span>
+      <h2 class="section-title">Grocery <span class="gradient-text">Essentials</span></h2>
+      <p class="section-subtitle">Shop pantry staples, daily groceries and premium dry fruits through Amazon.</p>
+    </div>
+    <div class="shop-banners-grid grocery-banners-grid">
+
+      <!-- Groceries -->
+      <div class="shop-banner-card shop-banner-groceries" id="banner-groceries">
+        <div class="shop-banner-glow"></div>
+        <div class="shop-banner-icon">🛒</div>
+        <div class="shop-banner-content">
+          <span class="badge badge-green">Daily Essentials</span>
+          <h3>Groceries</h3>
+          <p>Rice, atta, oils, spices, snacks and everyday household grocery picks.</p>
+          <ul class="shop-banner-features">
+            <li>🥫 Pantry Staples</li>
+            <li>🍚 Daily Cooking</li>
+            <li>🧂 Kitchen Essentials</li>
+          </ul>
+          <a href="https://amzn.to/49pGiam" class="btn btn-primary shop-banner-btn" target="_blank" rel="sponsored noopener noreferrer" id="shop-groceries-btn">Shop Groceries →</a>
+        </div>
+      </div>
+
+      <!-- Dry Fruits -->
+      <div class="shop-banner-card shop-banner-dry-fruits" id="banner-dry-fruits">
+        <div class="shop-banner-glow"></div>
+        <div class="shop-banner-icon">🥜</div>
+        <div class="shop-banner-content">
+          <span class="badge badge-amber">Healthy Snacks</span>
+          <h3>Dry Fruits</h3>
+          <p>Almonds, cashews, raisins, dates and nutritious snack boxes.</p>
+          <ul class="shop-banner-features">
+            <li>🌰 Nuts &amp; Seeds</li>
+            <li>🍯 Dates &amp; Raisins</li>
+            <li>🎁 Gift Packs</li>
+          </ul>
+          <a href="https://amzn.to/4n6UVoM" class="btn btn-primary shop-banner-btn" target="_blank" rel="sponsored noopener noreferrer" id="shop-dry-fruits-btn">Shop Dry Fruits →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- PRODUCTS MAIN -->
 <section class="products-section" id="products-main">
   <div class="container">
@@ -122,6 +170,8 @@
         <button class="pill" data-cat="women-fashion" id="filter-women">👗 Women</button>
         <button class="pill" data-cat="men-fashion"   id="filter-men">👔 Men</button>
         <button class="pill" data-cat="kids-fashion"  id="filter-kids">🧒 Kids</button>
+        <button class="pill" data-cat="groceries"     id="filter-groceries">🛒 Groceries</button>
+        <button class="pill" data-cat="dry-fruits"    id="filter-dry-fruits">🥜 Dry Fruits</button>
       </div>
       <div class="sort-wrap">
         <select id="sort-select" aria-label="Sort products">
@@ -135,7 +185,7 @@
     </div>
 
     <!-- Results count -->
-    <div class="results-meta" id="results-meta">Showing <strong id="count-label">25</strong> products</div>
+    <div class="results-meta" id="results-meta">Showing <strong id="count-label">35</strong> products</div>
 
     <!-- Grid -->
     <div class="products-grid" id="products-grid"></div>
@@ -169,6 +219,8 @@
         <li><a href="https://amzn.to/49i1dfp" target="_blank" rel="sponsored noopener noreferrer">Women's Shop</a></li>
         <li><a href="https://amzn.to/4tkBavC" target="_blank" rel="sponsored noopener noreferrer">Men's Shop</a></li>
         <li><a href="https://amzn.to/4tOtUJn" target="_blank" rel="sponsored noopener noreferrer">Kids' Shop</a></li>
+        <li><a href="https://amzn.to/49pGiam" target="_blank" rel="sponsored noopener noreferrer">Groceries</a></li>
+        <li><a href="https://amzn.to/4n6UVoM" target="_blank" rel="sponsored noopener noreferrer">Dry Fruits</a></li>
         <li><a href="https://amzn.to/42I2xoh" target="_blank" rel="sponsored noopener noreferrer">Tech</a></li>
         <li><a href="https://amzn.to/4n61KqK" target="_blank" rel="sponsored noopener noreferrer">Audio</a></li>
         <li><a href="https://amzn.to/4nahVn2" target="_blank" rel="sponsored noopener noreferrer">Wearables</a></li>

@@ -59,6 +59,18 @@
 .shop-banner-kids                     { border-color: rgba(245,158,11,0.25); }
 .shop-banner-kids:hover               { border-color: rgba(245,158,11,0.55); }
 
+.shop-banner-groceries .shop-banner-glow { background: #10b981; }
+.shop-banner-groceries                   { border-color: rgba(16,185,129,0.25); }
+.shop-banner-groceries:hover             { border-color: rgba(16,185,129,0.55); }
+
+.shop-banner-dry-fruits .shop-banner-glow { background: #f59e0b; }
+.shop-banner-dry-fruits                   { border-color: rgba(245,158,11,0.25); }
+.shop-banner-dry-fruits:hover             { border-color: rgba(245,158,11,0.55); }
+
+.grocery-banners-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .shop-banner-icon {
   font-size: 3rem;
   margin-bottom: 16px;
@@ -273,6 +285,7 @@
 @media (max-width: 768px) {
   .products-grid { grid-template-columns: repeat(2, 1fr); }
   .shop-banners-grid { grid-template-columns: 1fr; }
+  .grocery-banners-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .products-grid { grid-template-columns: 1fr; }

@@ -8,6 +8,8 @@ const CAMERA_LINK    = 'https://amzn.to/4n1jfby';
 const WOMENS_LINK    = 'https://amzn.to/49i1dfp';
 const MENS_LINK      = 'https://amzn.to/4tkBavC';
 const KIDS_LINK      = 'https://amzn.to/4tOtUJn';
+const GROCERIES_LINK = 'https://amzn.to/49pGiam';
+const DRY_FRUITS_LINK = 'https://amzn.to/4n6UVoM';
 
 const ALL_PRODUCTS = [
   // Tech
@@ -52,6 +54,10 @@ const ALL_PRODUCTS = [
   { id:31, name:"Kids' Clothing Set",       price:null, oldPrice:null, rating:4.9, reviews:2100, img:'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=400&q=80', cat:'kids-fashion', badge:'badge-amber', badgeText:"Kids' Pick",    desc:'Fun & colourful clothing sets for boys and girls (2–12 yrs).', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
   { id:32, name:"Kids' Ethnic Wear",        price:null, oldPrice:null, rating:4.7, reviews:640,  img:'https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=400&q=80', cat:'kids-fashion', badge:'badge-pink',   badgeText:'Festival Ready', desc:'Tiny lehengas, sherwanis & traditional sets for celebrations.', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
   { id:33, name:"Baby & Toddler Essentials",price:null, oldPrice:null, rating:4.8, reviews:890,  img:'https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=400&q=80', cat:'kids-fashion', badge:'badge-cyan',   badgeText:'Adorable',       desc:'Rompers, sleepsuits & accessories for 0–3 year olds.', affiliateUrl:KIDS_LINK, ctaText:'Shop on Amazon →', priceLabel:'View on Amazon' },
+  // Groceries
+  { id:34, name:'Daily Groceries',           price:null, oldPrice:null, rating:4.7, reviews:1800, emoji:'🛒', cat:'groceries',  badge:'badge-green',  badgeText:'Daily Needs',    desc:'Staples, snacks, spices and kitchen essentials for everyday shopping.', affiliateUrl:GROCERIES_LINK, ctaText:'Shop Groceries →', priceLabel:'View on Amazon' },
+  // Dry Fruits
+  { id:35, name:'Premium Dry Fruits',        price:null, oldPrice:null, rating:4.8, reviews:1320, emoji:'🥜', cat:'dry-fruits', badge:'badge-amber',  badgeText:'Healthy Pick',   desc:'Almonds, cashews, raisins, dates and gift packs for healthy snacking.', affiliateUrl:DRY_FRUITS_LINK, ctaText:'Shop Dry Fruits →', priceLabel:'View on Amazon' },
 ];
 
 let filtered = [...ALL_PRODUCTS];
