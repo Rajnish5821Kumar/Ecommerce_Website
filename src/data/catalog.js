@@ -2,12 +2,12 @@ export const AFFILIATE_LINKS = {
   women: 'https://amzn.to/49i1dfp',
   men: 'https://amzn.to/4tkBavC',
   kids: 'https://amzn.to/4tOtUJn',
-  tech: 'https://amzn.to/42I2xoh',
+  tech: 'https://amzn.to/3ORkkGr',
   audio: 'https://amzn.to/4n61KqK',
-  wearables: 'https://amzn.to/4nahVn2',
+  wearables: 'https://amzn.to/4urUFTW',
   gaming: 'https://amzn.to/4uo3jTg',
-  lifestyle: 'https://amzn.to/4cZp197',
-  camera: 'https://amzn.to/4n1jfby',
+  lifestyle: 'https://amzn.to/4tSOM2e',
+  camera: 'https://amzn.to/4cYPOSN',
   groceries: 'https://amzn.to/49pGiam',
   dryFruits: 'https://amzn.to/4n6UVoM'
 };
