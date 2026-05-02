@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color: #263238;
+    background: #fbfaf7;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background:
+      linear-gradient(180deg, rgba(251, 250, 247, 0.98), rgba(246, 241, 232, 0.72)),
+      repeating-linear-gradient(90deg, rgba(38, 50, 56, 0.025) 0 1px, transparent 1px 80px);
+    font-family: "DM Sans", Arial, sans-serif;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply min-h-screen bg-paper text-charcoal;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-saffronDark;
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-bold tracking-tight text-charcoal sm:text-4xl lg:text-5xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-base leading-7 text-slate;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-saffron px-5 py-3 text-sm font-bold text-white shadow-card transition hover:bg-saffronDark focus:outline-none focus:ring-4 focus:ring-saffron/20;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-5 py-3 text-sm font-bold text-charcoal transition hover:border-charcoal hover:bg-wheat focus:outline-none focus:ring-4 focus:ring-slate/10;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-line bg-white shadow-card;
+  }
+
+  .fine-link {
+    @apply text-sm font-bold text-saffronDark underline-offset-4 transition hover:text-saffron hover:underline;
+  }
+
+  .nav-link {
+    @apply rounded-full px-4 py-2 text-sm font-bold text-slate transition hover:bg-wheat hover:text-charcoal;
+  }
+
+  .nav-link-active {
+    @apply bg-charcoal text-white hover:bg-charcoal hover:text-white;
+  }
+}
