@@ -1,13 +1,13 @@
 /* === AMAZON AFFILIATE LINKS === */
-const TECH_LINK      = 'https://amzn.to/4tGOvPH';
-const AUDIO_LINK     = 'https://amzn.to/4tKVas5';
-const WEARABLE_LINK  = 'https://amzn.to/4eFXMD9';
-const GAMING_LINK    = 'https://amzn.to/4tX9GNm';
-const LIFESTYLE_LINK = 'https://amzn.to/4nnBCb7';
-const CAMERA_LINK    = 'https://amzn.to/4unI6Jg';
-const WOMENS_LINK    = 'https://amzn.to/49b5Rfh';
-const MENS_LINK      = 'https://amzn.to/3QIJmYN';
-const KIDS_LINK      = 'https://amzn.to/4enH8Ig';
+const TECH_LINK      = 'https://amzn.to/42I2xoh';
+const AUDIO_LINK     = 'https://amzn.to/4n61KqK';
+const WEARABLE_LINK  = 'https://amzn.to/4nahVn2';
+const GAMING_LINK    = 'https://amzn.to/4uo3jTg';
+const LIFESTYLE_LINK = 'https://amzn.to/4cZp197';
+const CAMERA_LINK    = 'https://amzn.to/4n1jfby';
+const WOMENS_LINK    = 'https://amzn.to/49i1dfp';
+const MENS_LINK      = 'https://amzn.to/4wkHC8y';
+const KIDS_LINK      = 'https://amzn.to/4tOtUJn';
 
 const ALL_PRODUCTS = [
   // Tech
