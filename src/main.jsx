@@ -1,22 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  ArrowRight,
-  CheckCircle2,
-  ChevronDown,
-  ExternalLink,
-  Filter,
-  Mail,
-  Menu,
-  Search,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Store,
-  Truck,
-  X
-} from 'lucide-react';
+import { BrandLogo } from './components/BrandLogo.jsx';
+import { IconoirIcon } from './components/IconoirIcon.jsx';
 import { categories, categoryFilters, featuredProducts, products } from './data/catalog.js';
+import { trackEvent, unlockAnalyticsDashboard } from './lib/analytics.js';
 import './styles.css';
 
 const routes = [
@@ -61,6 +48,13 @@ function externalProps() {
   };
 }
 
+function affiliateTrackingProps(payload) {
+  return {
+    ...externalProps(),
+    onClick: () => trackEvent('affiliate_click', payload)
+  };
+}
+
 function Header({ route }) {
   const [open, setOpen] = useState(false);
 
@@ -72,13 +66,7 @@ function Header({ route }) {
     <header className="sticky top-0 z-50 border-b border-line bg-paper/92 backdrop-blur-xl">
       <div className="container-page flex h-20 items-center justify-between">
         <a href="#/" className="flex items-center gap-3" aria-label="Rajnish Store home">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-charcoal text-white">
-            <Store size={20} strokeWidth={2.4} />
-          </span>
-          <span>
-            <span className="block font-display text-2xl font-bold leading-none tracking-tight text-charcoal">Rajnish</span>
-            <span className="block text-xs font-bold uppercase tracking-[0.2em] text-slate">Amazon Finds</span>
-          </span>
+          <BrandLogo />
         </a>
 
         <nav className="hidden items-center gap-2 md:flex" aria-label="Main navigation">
@@ -98,7 +86,7 @@ function Header({ route }) {
             Affiliate disclosure
           </a>
           <a href="#/products" className="btn-primary">
-            Browse products <ArrowRight size={16} />
+            Browse products <IconoirIcon name="arrowRight" size={16} />
           </a>
         </div>
 
@@ -108,7 +96,7 @@ function Header({ route }) {
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
         >
-          {open ? <X size={20} /> : <Menu size={20} />}
+          <IconoirIcon name={open ? 'xmark' : 'menu'} size={20} />
         </button>
       </div>
 
@@ -134,13 +122,7 @@ function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr]">
           <div>
             <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-charcoal text-white">
-                <Store size={20} />
-              </span>
-              <div>
-                <p className="font-display text-2xl font-bold text-charcoal">Rajnish Store</p>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate">Curated for India</p>
-              </div>
+              <BrandLogo />
             </div>
             <p className="mt-5 max-w-md text-sm leading-7 text-slate">
               A clean affiliate storefront for practical Amazon finds across fashion, electronics, groceries and home essentials.
@@ -154,7 +136,15 @@ function Footer() {
             <FooterColumn title="Shop">
               <a href="#/products">All products</a>
               {categories.map((category) => (
-                <a key={category.id} href={category.href} {...externalProps()}>
+                <a
+                  key={category.id}
+                  href={category.href}
+                  {...affiliateTrackingProps({
+                    label: `Footer: ${category.label}`,
+                    href: category.href,
+                    category: category.id
+                  })}
+                >
                   {category.label}
                 </a>
               ))}
@@ -197,9 +187,16 @@ function FooterColumn({ title, children }) {
 
 function AffiliateButton({ href, children, className = 'btn-primary' }) {
   return (
-    <a href={href} className={className} {...externalProps()}>
+    <a
+      href={href}
+      className={className}
+      {...affiliateTrackingProps({
+        label: typeof children === 'string' ? children : 'Affiliate CTA',
+        href
+      })}
+    >
       {children}
-      <ExternalLink size={16} />
+      <IconoirIcon name="arrowUpRight" size={16} />
     </a>
   );
 }
@@ -207,7 +204,7 @@ function AffiliateButton({ href, children, className = 'btn-primary' }) {
 function DisclosureCallout() {
   return (
     <div className="surface-card flex flex-col gap-4 bg-mist p-5 sm:flex-row sm:items-start">
-      <ShieldCheck className="mt-1 shrink-0 text-mint" size={24} />
+      <IconoirIcon name="shieldCheck" size={24} className="mt-1 text-mint" />
       <div>
         <p className="font-bold text-charcoal">Affiliate transparency</p>
         <p className="mt-1 text-sm leading-6 text-slate">
@@ -220,20 +217,19 @@ function DisclosureCallout() {
 
 function TrustStrip() {
   const items = [
-    { icon: ShieldCheck, title: 'Clear affiliate links', copy: 'Every external shopping button opens Amazon directly.' },
-    { icon: Truck, title: 'Amazon fulfilment', copy: 'Delivery, returns and pricing are handled by Amazon.' },
-    { icon: CheckCircle2, title: 'Useful categories', copy: 'Fashion, groceries, tech and home picks in one place.' }
+    { icon: 'shieldCheck', title: 'Clear affiliate links', copy: 'Every external shopping button opens Amazon directly.' },
+    { icon: 'truck', title: 'Amazon fulfilment', copy: 'Delivery, returns and pricing are handled by Amazon.' },
+    { icon: 'checkCircle', title: 'Useful categories', copy: 'Fashion, groceries, tech and home picks in one place.' }
   ];
 
   return (
     <section className="border-y border-line bg-white">
       <div className="container-page grid gap-4 py-8 md:grid-cols-3">
         {items.map((item) => {
-          const Icon = item.icon;
           return (
             <div key={item.title} className="flex gap-4 rounded-2xl bg-paper p-5">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-charcoal text-white">
-                <Icon size={19} />
+                <IconoirIcon name={item.icon} size={19} />
               </span>
               <div>
                 <p className="font-bold text-charcoal">{item.title}</p>
@@ -255,7 +251,11 @@ function CategoryGrid({ compact = false }) {
           key={category.id}
           href={category.href}
           className="group overflow-hidden rounded-2xl border border-line bg-white shadow-card transition hover:-translate-y-1 hover:shadow-soft"
-          {...externalProps()}
+          {...affiliateTrackingProps({
+            label: `Category card: ${category.label}`,
+            href: category.href,
+            category: category.id
+          })}
         >
           <div className="relative aspect-[4/3] overflow-hidden bg-wheat">
             <img
@@ -270,8 +270,13 @@ function CategoryGrid({ compact = false }) {
           </div>
           <div className="p-5">
             <div className="flex items-start justify-between gap-3">
-              <h3 className="text-lg font-extrabold text-charcoal">{category.label}</h3>
-              <ExternalLink className="mt-1 shrink-0 text-slate transition group-hover:text-saffron" size={17} />
+              <h3 className="flex items-center gap-2 text-lg font-extrabold text-charcoal">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-wheat text-saffronDark">
+                  <IconoirIcon name={category.icon} size={18} />
+                </span>
+                {category.label}
+              </h3>
+              <IconoirIcon name="arrowUpRight" size={17} className="mt-1 text-slate transition group-hover:text-saffron" />
             </div>
             <p className="mt-2 text-sm leading-6 text-slate">{category.description}</p>
             <span className="mt-4 inline-flex rounded-full bg-wheat px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-saffronDark">
@@ -305,7 +310,7 @@ function ProductCard({ product }) {
         <div className="mb-3 flex items-center justify-between gap-3 text-xs font-bold uppercase tracking-[0.14em] text-slate">
           <span>{product.categoryShortLabel}</span>
           <span className="inline-flex items-center gap-1 text-saffronDark">
-            <Star size={14} fill="currentColor" strokeWidth={0} />
+            <IconoirIcon name="star" size={14} />
             {product.rating}
           </span>
         </div>
@@ -313,9 +318,19 @@ function ProductCard({ product }) {
         <p className="mt-3 flex-1 text-sm leading-6 text-slate">{product.description}</p>
         <div className="mt-5 flex items-center justify-between gap-3 border-t border-line pt-4">
           <span className="text-sm font-bold text-mint">{product.priceLabel}</span>
-          <AffiliateButton href={product.affiliateUrl} className="inline-flex items-center justify-center gap-2 rounded-full bg-charcoal px-4 py-2 text-xs font-bold text-white transition hover:bg-saffronDark">
+          <a
+            href={product.affiliateUrl}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-charcoal px-4 py-2 text-xs font-bold text-white transition hover:bg-saffronDark"
+            {...affiliateTrackingProps({
+              label: `Product: ${product.name}`,
+              href: product.affiliateUrl,
+              category: product.category,
+              productId: product.id
+            })}
+          >
             Open
-          </AffiliateButton>
+            <IconoirIcon name="arrowUpRight" size={14} />
+          </a>
         </div>
       </div>
     </article>
@@ -328,7 +343,7 @@ function Hero() {
     <section className="container-page grid gap-10 pb-16 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-24 lg:pt-18">
       <div>
         <span className="eyebrow">
-          <Sparkles size={14} />
+          <IconoirIcon name="sparks" size={14} />
           Curated Amazon finds for India
         </span>
         <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold leading-[0.95] tracking-tight text-charcoal sm:text-6xl lg:text-7xl">
@@ -339,7 +354,7 @@ function Hero() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href="#/products" className="btn-primary">
-            Explore all products <ArrowRight size={17} />
+            Explore all products <IconoirIcon name="arrowRight" size={17} />
           </a>
           <a href="#/affiliate-disclosure" className="btn-secondary">
             How affiliate links work
@@ -366,7 +381,11 @@ function Hero() {
               key={category.id}
               href={category.href}
               className={`group relative overflow-hidden rounded-2xl bg-wheat ${index === 0 ? 'sm:col-span-2' : ''}`}
-              {...externalProps()}
+              {...affiliateTrackingProps({
+                label: `Hero category: ${category.label}`,
+                href: category.href,
+                category: category.id
+              })}
             >
               <img
                 src={category.image}
@@ -376,7 +395,10 @@ function Hero() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Shop category</p>
+                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
+                  <IconoirIcon name={category.icon} size={15} />
+                  Shop category
+                </p>
                 <p className="mt-1 text-xl font-extrabold">{category.label}</p>
               </div>
             </a>
@@ -413,7 +435,7 @@ function HomePage() {
               <h2 className="section-title mt-4">Popular Amazon finds</h2>
             </div>
             <a href="#/products" className="btn-secondary">
-              View full catalog <ArrowRight size={16} />
+              View full catalog <IconoirIcon name="arrowRight" size={16} />
             </a>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -485,7 +507,7 @@ function ProductsPage() {
       <section className="container-page pb-16 lg:pb-24">
         <div className="surface-card mb-8 grid gap-4 p-4 lg:grid-cols-[1fr_auto] lg:items-center">
           <label className="flex items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-3">
-            <Search size={19} className="text-slate" />
+            <IconoirIcon name="search" size={19} className="text-slate" />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -495,7 +517,7 @@ function ProductsPage() {
             />
           </label>
           <label className="flex items-center gap-3 rounded-2xl border border-line bg-paper px-4 py-3">
-            <Filter size={18} className="text-slate" />
+            <IconoirIcon name="filter" size={18} className="text-slate" />
             <select
               value={sort}
               onChange={(event) => setSort(event.target.value)}
@@ -587,7 +609,7 @@ function AboutPage() {
           ['Transparent affiliate model', 'The store earns through qualifying purchases, with no extra cost added by this website.']
         ].map(([title, copy]) => (
           <div key={title} className="surface-card p-7">
-            <CheckCircle2 className="text-mint" size={26} />
+            <IconoirIcon name="checkCircle" size={26} className="text-mint" />
             <h2 className="mt-5 text-xl font-extrabold text-charcoal">{title}</h2>
             <p className="mt-3 text-sm leading-7 text-slate">{copy}</p>
           </div>
@@ -598,6 +620,41 @@ function AboutPage() {
 }
 
 function ContactPage() {
+  const [secretClicks, setSecretClicks] = useState(0);
+  const [showCodePrompt, setShowCodePrompt] = useState(false);
+  const [code, setCode] = useState('');
+  const [dashboard, setDashboard] = useState(null);
+  const [dashboardError, setDashboardError] = useState('');
+  const [dashboardLoading, setDashboardLoading] = useState(false);
+
+  function handleSecretContextMenu(event) {
+    event.preventDefault();
+    const next = secretClicks + 1;
+    setSecretClicks(next);
+    if (next >= 4) {
+      setShowCodePrompt(true);
+      setSecretClicks(0);
+      trackEvent('admin_dashboard_trigger', { label: 'Rajnish Shops right click sequence' });
+    }
+  }
+
+  async function handleDashboardUnlock(event) {
+    event.preventDefault();
+    setDashboardError('');
+    setDashboardLoading(true);
+    try {
+      const data = await unlockAnalyticsDashboard(code.trim());
+      setDashboard(data);
+      setShowCodePrompt(false);
+      setCode('');
+      trackEvent('admin_dashboard_unlocked', { label: 'Analytics dashboard opened' });
+    } catch (error) {
+      setDashboardError(error.message);
+    } finally {
+      setDashboardLoading(false);
+    }
+  }
+
   return (
     <main>
       <PageHero
@@ -607,9 +664,13 @@ function ContactPage() {
       />
       <section className="container-page grid gap-6 pb-16 lg:grid-cols-[0.85fr_1.15fr] lg:pb-24">
         <div className="surface-card p-7">
-          <Mail className="text-saffronDark" size={28} />
+          <IconoirIcon name="mail" size={28} className="text-saffronDark" />
           <h2 className="mt-5 text-2xl font-extrabold text-charcoal">Email</h2>
-          <a href="mailto:rajoyadav1419@gmail.com" className="mt-3 block text-lg font-bold text-saffronDark">
+          <a
+            href="mailto:rajoyadav1419@gmail.com"
+            className="mt-3 block text-lg font-bold text-saffronDark"
+            onClick={() => trackEvent('contact_click', { label: 'Contact email', href: 'mailto:rajoyadav1419@gmail.com' })}
+          >
             rajoyadav1419@gmail.com
           </a>
           <p className="mt-5 text-sm leading-7 text-slate">
@@ -633,7 +694,167 @@ function ContactPage() {
           </div>
         </div>
       </section>
+
+      <section className="container-page pb-16 lg:pb-24">
+        <button
+          type="button"
+          onContextMenu={handleSecretContextMenu}
+          className="surface-card flex w-full items-center justify-between gap-5 p-6 text-left transition hover:-translate-y-1 hover:shadow-soft"
+          aria-label="Rajnish Shops analytics access"
+        >
+          <span className="flex items-center gap-4">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-charcoal text-white">
+              <IconoirIcon name="shopWindow" size={23} />
+            </span>
+            <span>
+              <span className="block text-xl font-extrabold text-charcoal">Rajnish Shops</span>
+              <span className="block text-sm text-slate">Internal owner access point</span>
+            </span>
+          </span>
+          <span className="hidden rounded-full bg-wheat px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-slate sm:inline-flex">
+            Owner tools
+          </span>
+        </button>
+      </section>
+
+      {showCodePrompt && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-charcoal/50 px-5 backdrop-blur-sm">
+          <form onSubmit={handleDashboardUnlock} className="w-full max-w-md rounded-3xl border border-line bg-white p-6 shadow-soft">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-saffronDark">Analytics access</p>
+                <h2 className="mt-2 text-2xl font-extrabold text-charcoal">Enter dashboard code</h2>
+              </div>
+              <button type="button" className="rounded-full border border-line p-2 text-slate hover:text-charcoal" onClick={() => setShowCodePrompt(false)}>
+                <IconoirIcon name="xmark" size={18} />
+              </button>
+            </div>
+            <input
+              value={code}
+              onChange={(event) => setCode(event.target.value)}
+              className="mt-6 w-full rounded-2xl border border-line bg-paper px-4 py-3 text-sm font-bold text-charcoal outline-none focus:border-saffron"
+              placeholder="Enter code"
+              autoFocus
+            />
+            {dashboardError && <p className="mt-3 text-sm font-semibold text-red-700">{dashboardError}</p>}
+            <button type="submit" className="btn-primary mt-5 w-full" disabled={dashboardLoading}>
+              {dashboardLoading ? 'Checking...' : 'Open analytics dashboard'}
+            </button>
+            <p className="mt-4 text-xs leading-5 text-slate">
+              This dashboard is only available when the analytics server is running with stored event data.
+            </p>
+          </form>
+        </div>
+      )}
+
+      {dashboard && <AnalyticsDashboard data={dashboard} onClose={() => setDashboard(null)} />}
     </main>
+  );
+}
+
+function formatLocation(location = {}) {
+  const parts = [location.city, location.region, location.country].filter(Boolean);
+  return parts.length ? parts.join(', ') : location.status === 'local' ? 'Local network' : 'Unknown';
+}
+
+function AnalyticsDashboard({ data, onClose }) {
+  const summary = data.summary || {};
+  const events = data.events || [];
+  return (
+    <div className="fixed inset-0 z-[80] overflow-y-auto bg-charcoal/55 px-4 py-6 backdrop-blur-sm">
+      <div className="mx-auto max-w-7xl rounded-3xl border border-line bg-white shadow-soft">
+        <div className="sticky top-0 z-10 flex flex-col gap-4 border-b border-line bg-white/95 p-5 backdrop-blur md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-saffronDark">Owner analytics</p>
+            <h2 className="mt-1 text-3xl font-extrabold text-charcoal">Rajnish Store access dashboard</h2>
+            <p className="mt-1 text-sm text-slate">Last updated: {summary.lastUpdated ? new Date(summary.lastUpdated).toLocaleString() : 'Now'}</p>
+          </div>
+          <button type="button" onClick={onClose} className="btn-secondary">
+            Close
+          </button>
+        </div>
+
+        <div className="grid gap-4 p-5 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            ['Events', summary.totalEvents || 0],
+            ['Page views', summary.pageViews || 0],
+            ['Clicks', summary.clicks || 0],
+            ['Unique IPs', summary.uniqueIps || 0],
+            ['Visitors', summary.uniqueVisitors || 0]
+          ].map(([label, value]) => (
+            <div key={label} className="rounded-2xl border border-line bg-paper p-4">
+              <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-slate">{label}</p>
+              <p className="mt-2 font-display text-3xl font-bold text-charcoal">{value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-5 p-5 pt-0 lg:grid-cols-[0.85fr_1.35fr]">
+          <section className="rounded-2xl border border-line bg-paper p-5">
+            <h3 className="text-lg font-extrabold text-charcoal">Top clicked links</h3>
+            <div className="mt-4 grid gap-3">
+              {(summary.topLinks || []).length ? (
+                summary.topLinks.map((link) => (
+                  <div key={`${link.href}-${link.label}`} className="rounded-xl bg-white p-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="font-bold text-charcoal">{link.label || 'Unknown link'}</p>
+                      <span className="rounded-full bg-wheat px-3 py-1 text-xs font-bold text-saffronDark">{link.clicks} clicks</span>
+                    </div>
+                    {link.href && <p className="mt-2 break-all text-xs text-slate">{link.href}</p>}
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-slate">No link clicks recorded yet.</p>
+              )}
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-line bg-white">
+            <div className="border-b border-line p-5">
+              <h3 className="text-lg font-extrabold text-charcoal">Recent access and click events</h3>
+              <p className="mt-1 text-sm text-slate">IP, approximate location, time, route and clicked link data.</p>
+            </div>
+            <div className="max-h-[620px] overflow-auto">
+              <table className="min-w-[980px] w-full text-left text-sm">
+                <thead className="sticky top-0 bg-wheat text-xs uppercase tracking-[0.14em] text-slate">
+                  <tr>
+                    <th className="px-4 py-3">Time</th>
+                    <th className="px-4 py-3">Type</th>
+                    <th className="px-4 py-3">IP</th>
+                    <th className="px-4 py-3">Location</th>
+                    <th className="px-4 py-3">Page</th>
+                    <th className="px-4 py-3">Link / Action</th>
+                    <th className="px-4 py-3">Device</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line">
+                  {events.map((event) => (
+                    <tr key={event.id} className="align-top">
+                      <td className="px-4 py-3 font-semibold text-charcoal">{new Date(event.receivedAt).toLocaleString()}</td>
+                      <td className="px-4 py-3">
+                        <span className="rounded-full bg-paper px-3 py-1 text-xs font-bold text-charcoal">{event.type}</span>
+                      </td>
+                      <td className="px-4 py-3 font-mono text-xs text-charcoal">{event.ip}</td>
+                      <td className="px-4 py-3 text-slate">
+                        <p className="font-semibold text-charcoal">{formatLocation(event.location)}</p>
+                        <p className="text-xs">{event.location?.isp || event.location?.timezone || ''}</p>
+                      </td>
+                      <td className="px-4 py-3 text-slate">{event.path || '-'}</td>
+                      <td className="px-4 py-3">
+                        <p className="font-semibold text-charcoal">{event.label || '-'}</p>
+                        {event.href && <p className="mt-1 max-w-[260px] break-all text-xs text-slate">{event.href}</p>}
+                      </td>
+                      <td className="px-4 py-3 max-w-[280px] text-xs text-slate">{event.userAgent || '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {!events.length && <p className="p-5 text-sm text-slate">No analytics events recorded yet.</p>}
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -642,11 +863,11 @@ function PrivacyPage() {
     <LegalPage
       eyebrow="Privacy"
       title="Privacy Policy"
-      intro="Rajnish Store is a static affiliate website. We keep data collection minimal and use third-party destinations only when you choose to open an external Amazon link."
+      intro="Rajnish Store is an affiliate website with lightweight owner analytics. We keep data collection focused on visits, link clicks and contact actions."
       sections={[
-        ['Information we collect', 'We may receive basic contact details if you email us. The website itself does not run a custom account system, payment system or checkout.'],
-        ['Affiliate and third-party links', 'External Amazon links may use affiliate tracking handled by Amazon or its affiliate systems. Their privacy policies apply after you leave this site.'],
-        ['Cookies and analytics', 'If analytics are added in the future, they should be disclosed here before launch. The current React rebuild does not require shopper accounts or cart storage.'],
+        ['Information we collect', 'We may receive basic contact details if you email us. When the analytics server is enabled, we also record visit and click events including IP address, approximate IP-based location, browser user agent, page route, timestamp and clicked affiliate link details.'],
+        ['Affiliate and third-party links', 'External Amazon links may use affiliate tracking handled by Amazon or its affiliate systems. Their privacy policies apply after you leave this site. Public IP addresses may also be checked with an IP-location lookup service to estimate city, region and country.'],
+        ['Cookies and analytics', 'This site uses a local visitor identifier in browser storage to group events and a server-side analytics log to help the owner understand traffic and link clicks. The site does not require shopper accounts, payment details or cart storage.'],
         ['Contact', 'For privacy questions, email rajoyadav1419@gmail.com.']
       ]}
     />
@@ -719,6 +940,10 @@ function App() {
     '/privacy-policy': <PrivacyPage />,
     '/affiliate-disclosure': <AffiliateDisclosurePage />
   };
+
+  useEffect(() => {
+    trackEvent('page_view', { path: route, label: `Route: ${route}` });
+  }, [route]);
 
   return (
     <div className="page-shell">

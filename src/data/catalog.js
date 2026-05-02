@@ -18,6 +18,7 @@ export const categories = [
     label: "Women's Shop",
     shortLabel: 'Women',
     description: 'Dresses, ethnic wear and everyday styles.',
+    icon: 'shirt',
     href: AFFILIATE_LINKS.women,
     image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=900&q=85&auto=format&fit=crop'
   },
@@ -26,6 +27,7 @@ export const categories = [
     label: "Men's Shop",
     shortLabel: 'Men',
     description: 'Shirts, kurtas, activewear and accessories.',
+    icon: 'shirt',
     href: AFFILIATE_LINKS.men,
     image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=85&auto=format&fit=crop'
   },
@@ -34,6 +36,7 @@ export const categories = [
     label: "Kids' Shop",
     shortLabel: 'Kids',
     description: 'Clothing and essentials for little shoppers.',
+    icon: 'gift',
     href: AFFILIATE_LINKS.kids,
     image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=900&q=85&auto=format&fit=crop'
   },
@@ -42,6 +45,7 @@ export const categories = [
     label: 'Groceries',
     shortLabel: 'Groceries',
     description: 'Pantry staples, daily essentials and snacks.',
+    icon: 'shoppingBag',
     href: AFFILIATE_LINKS.groceries,
     image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&q=85&auto=format&fit=crop'
   },
@@ -50,6 +54,7 @@ export const categories = [
     label: 'Dry Fruits',
     shortLabel: 'Dry Fruits',
     description: 'Almonds, cashews, dates and gift packs.',
+    icon: 'organicFood',
     href: AFFILIATE_LINKS.dryFruits,
     image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=900&q=85&auto=format&fit=crop'
   },
@@ -58,6 +63,7 @@ export const categories = [
     label: 'Tech & Gadgets',
     shortLabel: 'Tech',
     description: 'Useful devices and everyday accessories.',
+    icon: 'laptop',
     href: AFFILIATE_LINKS.tech,
     image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=900&q=85&auto=format&fit=crop'
   },
@@ -66,6 +72,7 @@ export const categories = [
     label: 'Audio',
     shortLabel: 'Audio',
     description: 'Headphones, earbuds, speakers and mics.',
+    icon: 'soundHigh',
     href: AFFILIATE_LINKS.audio,
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=85&auto=format&fit=crop'
   },
@@ -74,6 +81,7 @@ export const categories = [
     label: 'Wearables',
     shortLabel: 'Wearables',
     description: 'Smartwatches, bands and fitness tech.',
+    icon: 'wristwatch',
     href: AFFILIATE_LINKS.wearables,
     image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900&q=85&auto=format&fit=crop'
   },
@@ -82,6 +90,7 @@ export const categories = [
     label: 'Gaming',
     shortLabel: 'Gaming',
     description: 'Controllers, keyboards, mice and headsets.',
+    icon: 'gamepad',
     href: AFFILIATE_LINKS.gaming,
     image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=900&q=85&auto=format&fit=crop'
   },
@@ -90,6 +99,7 @@ export const categories = [
     label: 'Lifestyle',
     shortLabel: 'Lifestyle',
     description: 'Home, wellness and daily utility picks.',
+    icon: 'homeSale',
     href: AFFILIATE_LINKS.lifestyle,
     image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=900&q=85&auto=format&fit=crop'
   },
@@ -98,6 +108,7 @@ export const categories = [
     label: 'Camera & Photo',
     shortLabel: 'Camera',
     description: 'Cameras, tripods, lenses and creator tools.',
+    icon: 'camera',
     href: AFFILIATE_LINKS.camera,
     image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=900&q=85&auto=format&fit=crop'
   }
